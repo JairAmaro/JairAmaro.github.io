@@ -3,19 +3,11 @@ import terminalIcon from './terminal-icon.module.css';
 interface Props {
   name: string;
   src: string;
-  color?: string;
 }
-const { name, src, color = 'transparent' } = Astro.props;
-
-// Verifica si el src es un archivo .svg o .png
-const isSVG = src.endsWith('.svg');
+const { name, src } = Astro.props;
 ---
 
-<div class={terminalIcon.base} style={`--icon-color: ${color};`}>
-  {isSVG ? (
-    <div class={terminalIcon.icon} style={`--svg: url(${src})`} />
-  ) : (
-    <img src={src} alt={name} />
-  )}
+<div class={terminalIcon.base}>
+  <img src={src} alt={name} class={terminalIcon.icon} />
   <span class={terminalIcon.name}>{name}</span>
 </div>
