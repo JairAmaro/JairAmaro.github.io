@@ -1,13 +1,16 @@
 ---
 import terminalIcon from './terminal-icon.module.css';
+
 interface Props {
   name: string;
   src: string;
+  textColor?: string;  // esto es para poder poner color en lso textos de termianl
 }
-const { name, src } = Astro.props;
+
+const { name, src, textColor = 'inherit' } = Astro.props;
 ---
 
 <div class={terminalIcon.base}>
   <img src={src} alt={name} class={terminalIcon.icon} />
-  <span class={terminalIcon.name}>{name}</span>
+  <span class={terminalIcon.name} style={`color: ${textColor};`}>{name}</span>
 </div>
