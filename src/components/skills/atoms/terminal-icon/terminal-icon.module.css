@@ -15,7 +15,9 @@
 
 .name {
 	font-size: var(--text-general);
+	color: white; /* Color blanco */
 }
+
 .icon {
 	display: inline-block;
 	width: 1em;
