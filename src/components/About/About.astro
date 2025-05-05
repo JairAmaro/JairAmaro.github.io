@@ -1,25 +1,27 @@
 ---
 import SocialIcons from '../SocialIcons.astro';
 import Title from '../atoms/Title.astro';
-import "./about.css"
-
-
+import "./about.css";
 ---
 
 <section id="about" class="about">
 	<div class="about__container">
-		<img class="about__img" src="/img/patick.jpg" />
+		<!-- Bloque horizontal: imagen + presentación -->
+		<div class="about__row">
+			<img class="about__img" src="/img/patick.jpg"/>
 
-		<div class="about__content">
-			<Title margin="1rem" contenido="Sobre mí" />
-			
-			<p class="about__text">¡Hola! Soy Oscar Amaro por mientras el pat 👋</p>
-			
-			<p class="about__text">
-				Soy un apasionado por los datos y la estadística, con experiencia en ingeniería de datos, análisis de datos y ciencia de datos. 
-				Me motiva transformar datos en información valiosa para la toma de decisiones y construir modelos que generen impacto en distintos sectores.
-			</p>
+			<div class="about__intro">
+				<Title margin="1rem" contenido="Sobre mí" />
+				<p class="about__text">¡Hola! Soy Oscar Amaro por mientras el pat 👋</p>
+				<p class="about__text">
+					Soy un apasionado por los datos y la estadística, con experiencia en ingeniería de datos, análisis de datos y ciencia de datos. 
+					Me motiva transformar datos en información valiosa para la toma de decisiones y construir modelos que generen impacto en distintos sectores.
+				</p>
+			</div>
+		</div>
 
+		<!-- Bloque vertical: texto extendido -->
+		<div class="about__more">
 			<p class="about__text">
 				Trabajo con herramientas como Python, SQL y Power BI, además de tener experiencia en Google Cloud Platform (GCP), 
 				utilizando servicios como BigQuery, Cloud Storage (Buckets) y Vertex AI para desarrollar soluciones de machine learning.
@@ -43,7 +45,7 @@ import "./about.css"
 
 			<p class="about__text">¡Bienvenido a mi espacio! 🚀</p>
 
-			<SocialIcons width="25" height="25"/>
+			<SocialIcons width="25" height="25" />
 		</div>
 	</div>
 </section>
