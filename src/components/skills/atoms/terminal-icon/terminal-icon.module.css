@@ -7,6 +7,7 @@
 }
 .base {
 	width: min-content;
+	--icon-color: white;   /* 🎯 Aquí defines el color real */
 	color: var(--icon-color);
 }
 .icon {
