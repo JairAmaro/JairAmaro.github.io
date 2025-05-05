@@ -1,32 +1,47 @@
 .base {
-	width: 100%;
+	width: min-content;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-}
-.base {
-	width: min-content;
 	color: var(--icon-color);
-}
-.icon {
-	font-size: 7rem;
+	padding: 0.75rem;
+	border-radius: 0.75rem;
+	background-color: transparent;
+
+	/* Sombra suave permanente (para móviles) */
+	box-shadow: 0 2px 6px rgba(255, 255, 255, 0.08);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.name {
-	font-size: var(--text-general);
-	color: white; /* Color blanco */
+/* Hover solo en dispositivos que lo soporten (PCs, no móviles) */
+@media (hover: hover) {
+	.base:hover {
+		transform: scale(1.05);
+		box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+	}
 }
 
 .icon {
-	display: inline-block;
-	width: 1em;
-	height: 1em;
-	background-color: currentColor;
+	width: 64px;
+	height: 64px;
+	object-fit: contain;
+	background-color: transparent;
+
+	/* Elimina máscara si estás usando imágenes normales */
+	/* Puedes eliminar este bloque si ya no usas var(--svg) */
+	/* Si sí usas SVG como máscara, lo puedes mantener */
 	-webkit-mask-image: var(--svg);
 	mask-image: var(--svg);
 	-webkit-mask-repeat: no-repeat;
 	mask-repeat: no-repeat;
 	-webkit-mask-size: 100% 100%;
 	mask-size: 100% 100%;
+}
+
+.name {
+	font-size: var(--text-general, 14px);
+	color: white;
+	margin-top: 0.5rem;
+	text-align: center;
 }
