@@ -51,7 +51,7 @@
 .body {
 	flex: 1;
 	padding: 10px;
-	background: var(--terminal-background, #e7e7e7);
+	background: var(--terminal-background, #080011);
 }
 
 .user__line {
