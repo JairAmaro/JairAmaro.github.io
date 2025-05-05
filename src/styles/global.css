@@ -1,31 +1,50 @@
 :root {
-	/* 🎨 Primary - Menta */
-	--primary-0: #0f1c2e;       /* Fondo general */
-	--primary-10: #1e2a38;
-	--primary-20: #2a3a4d;
-	--primary-30: #3ddc97;      /* Botón principal */
-	--primary-40: #50e6a6;
-	--primary-50: #a7f0ba;
+	/* 🎨 PALETA PRINCIPAL - tonos violeta */
+	--primary-0: #190230;
+	--primary-10: #2b1560;
+	--primary-20: #442288;
+	--primary-30: #5529ae;
+	--primary-40: #6632cf;
+	--primary-50: #7644e3;
+	--primary-60: #8664ee;
+	--primary-70: #a491f4;
+	--primary-80: #c2b9f9;
+	--primary-90: #dcd8fc;
+	--primary-95: #edeafd;
+	--primary-99: #f4f4fe;
+	--primary-100: #ffffff;
 
-	/* 🎨 Secondary - Coral rosado */
-	--secondary-10: #2e0f13;
-	--secondary-20: #ff6b6b;
-	--secondary-30: #ff9999;
+	/* 🎨 PALETA SECUNDARIA - tonos rosados */
+	--secondary-0: #1c050e;
+	--secondary-10: #490e25;
+	--secondary-20: #782344;
+	--secondary-30: #87224a;
+	--secondary-40: #ae285f;
+	--secondary-50: #c93978;
+	--secondary-60: #dc5898;
+	--secondary-70: #e77fb4;
+	--secondary-80: #f1b0d3;
+	--secondary-90: #f7d3e7;
+	--secondary-95: #fae9f3;
+	--secondary-99: #fcf3f8;
+	--secondary-100: #ffffff;
 
-	/* Superficies */
-	--surface: #1e2a38;
-	--surface-variant: #2e3c50;
-	--surface-dim: #394b5a;
-	--surface-bridge: #506072;
+	/* 🧱 SUPERFICIES */
+	--surface: #4F4360;
+	--surface-variant: #e0d8e7;
+	--surface-dim: #998da9;
+	--surface-bridge: #d6cdee;
 
-	/* Aplicación práctica */
-	--primary: var(--primary-30);
-	--on-primary: #ffffff;
+	/* 🔗 VARIABLES PRINCIPALES Y SECUNDARIAS */
+	--primary: var(--primary-60);
+	--on-primary: var(--primary-95);
 	--on-surface-primary: var(--primary-10);
 
-	--secondary: var(--secondary-20);
-	--on-secondary: #ffffff;
+	--secondary: var(--secondary-70); /* ✅ corregido: antes decía secndary */
+	--on-secondary: var(--secondary-95);
+	--on-surface-secondary: var(--secondary-95);
 
+	/* ✍️ TIPOGRAFÍA Y TAMAÑOS */
 	--text-small: 1.2rem;
 	--text-medium: 1.4rem;
 	--text-large: 1.6rem;
@@ -36,20 +55,25 @@
 	--text-general: 1.6rem;
 	--text-button: 1.2rem;
 	--font-montserrat: 'Montserrat', sans-serif;
+
 	--max-width: 108rem;
 
+	/* 🌌 FONDO GENERAL DEL SITIO */
 	--site-bg: var(--primary-0);
+
+	/* 🎇 FONDO DEL HERO CON GRADIENTE */
 	--hero-bg: linear-gradient(
 		-54deg,
 		var(--primary-0) -23%,
-		var(--primary-10),
+		var(--primary-20),
 		var(--primary-0) 51%
 	);
 
+	/* 🌈 GRADIENTE PARA TITULOS */
 	--text-gradient: radial-gradient(
 		circle farthest-corner at center center,
-		#3ddc97 0%,
-		#ff6b6b 100%
+		#58f9ff 0%,
+		#df44e7 100%
 	);
 }
 
@@ -59,14 +83,13 @@
 
 html {
 	font-family: var(--font-montserrat) !important;
-	font-size: 62.5%;
+	font-size: 62.5%; /* 1rem = 10px */
 	scroll-behavior: smooth;
 }
 
 body {
 	width: 100%;
-	background: var(--site-bg) no-repeat;
-	color: var(--on-primary);
+	background: var(--site-bg) no-repeat; /* ✅ solo una vez */
 }
 
 main {
@@ -74,7 +97,7 @@ main {
 }
 
 p {
-	color: var(--on-primary);
+	color: var(--primary-100); /* Blanco */
 	font-size: var(--text-general);
 }
 
