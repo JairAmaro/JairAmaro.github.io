@@ -5,12 +5,8 @@ const orbits = [
     { src: "/assets/Python.png", alt: "Python" },
   ],
   [
-    { src: "/assets/jupyter.svg", alt: "JUPYTER" },
+    { src: "/assets/jupyter.svg", alt: "Jupyter" },
     { src: "/assets/git.svg", alt: "Git" },
-  ],
-  [
-    { src: "/assets/javascript.svg", alt: "JavaScript" },
-    { src: "/assets/html5.svg", alt: "HTML5" },
   ],
 ];
 ---
@@ -32,53 +28,71 @@ const orbits = [
   border-radius: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
+  border: 3px solid white;
 }
 
-.orbit {
+.orbit-wrapper {
   position: absolute;
   top: 50%;
   left: 50%;
   transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.orbit-path {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
 .orbit-1 {
   width: 250px;
-  height: 150px;
-  animation: rotate1 20s linear infinite;
+  height: 180px;
+  animation: rotate1 18s linear infinite;
 }
+
+.orbit-1-path {
+  width: 250px;
+  height: 180px;
+}
+
 .orbit-2 {
   width: 200px;
-  height: 200px;
-  animation: rotate2 30s linear infinite reverse;
+  height: 130px;
+  animation: rotate2 25s linear infinite reverse;
 }
-.orbit-3 {
-  width: 150px;
-  height: 100px;
-  animation: rotate3 25s linear infinite;
-  transform: rotateX(30deg);
+
+.orbit-2-path {
+  width: 200px;
+  height: 130px;
 }
 
 .skill {
   position: absolute;
   width: 40px;
   height: 40px;
+  z-index: 2;
 }
 
 .skill img {
   width: 100%;
+  height: 100%;
   border-radius: 50%;
-  border: 2px solid white;
+  object-fit: cover;
 }
 
-.orbit-1 .skill:nth-child(1) { top: 0; left: 50%; transform: translate(-50%, -50%); }
-.orbit-1 .skill:nth-child(2) { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
+/* Posiciones dentro de cada órbita */
+.orbit-1 .skill:nth-child(1) { top: 0%; left: 50%; transform: translate(-50%, -50%); }
+.orbit-1 .skill:nth-child(2) { bottom: 0%; left: 50%; transform: translate(-50%, 50%); }
 
-.orbit-2 .skill:nth-child(1) { top: 50%; left: 0; transform: translate(-50%, -50%); }
-.orbit-2 .skill:nth-child(2) { top: 50%; right: 0; transform: translate(50%, -50%); }
+.orbit-2 .skill:nth-child(1) { left: 0%; top: 50%; transform: translate(-50%, -50%); }
+.orbit-2 .skill:nth-child(2) { right: 0%; top: 50%; transform: translate(50%, -50%); }
 
-.orbit-3 .skill:nth-child(1) { top: 10%; left: 75%; transform: translate(-50%, -50%); }
-.orbit-3 .skill:nth-child(2) { bottom: 10%; right: 75%; transform: translate(50%, 50%); }
-
+/* Animaciones */
 @keyframes rotate1 {
   from { transform: translate(-50%, -50%) rotate(0deg); }
   to { transform: translate(-50%, -50%) rotate(360deg); }
@@ -88,30 +102,23 @@ const orbits = [
   from { transform: translate(-50%, -50%) rotate(0deg); }
   to { transform: translate(-50%, -50%) rotate(360deg); }
 }
-
-@keyframes rotate3 {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
-}
 </style>
 
 <div class="container">
-  <img class="center-photo" src="/images/patick.jpg" alt="Tu foto" />
+  <img class="center-photo" src="/images/patick.jpg" />
 
-  <div class="orbit orbit-1">
+  <!-- Órbita 1 -->
+  <div class="orbit-wrapper orbit-1">
+    <div class="orbit-path orbit-1-path"></div>
     {orbits[0].map((skill) => (
       <div class="skill"><img src={skill.src} alt={skill.alt} /></div>
     ))}
   </div>
 
-  <div class="orbit orbit-2">
+  <!-- Órbita 2 -->
+  <div class="orbit-wrapper orbit-2">
+    <div class="orbit-path orbit-2-path"></div>
     {orbits[1].map((skill) => (
-      <div class="skill"><img src={skill.src} alt={skill.alt} /></div>
-    ))}
-  </div>
-
-  <div class="orbit orbit-3">
-    {orbits[2].map((skill) => (
       <div class="skill"><img src={skill.src} alt={skill.alt} /></div>
     ))}
   </div>
