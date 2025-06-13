@@ -9,20 +9,24 @@ import Portfolio from '../components/Portfolio.astro';
 import Skills from '../components/skills/Skills.astro';
 import Layout from '../layouts/Layout.astro';
 import OrbitSkills from '../components/OrbitSkills.astro';
-
 import PCHoloCard from '../components/PCHoloCard.astro';
 ---
 
-<Layout title="Oscar Amaro | Actuary | Data Analyst | Data Engineering | Data Scientist  ">
+<Layout title="Oscar Amaro | Actuary | Data Analyst | Data Engineering | Data Scientist">
 	<Header origin={mainMenu} />
 	<main class="self-center w-full">
 		<Hero />
+
+		<!-- 🌟 Tarjeta Holográfica -->
+		<section class="my-12 flex justify-center">
+			<PCHoloCard />
+		</section>
+
 		<About />
 		<Skills />
-		<OrbitSkills /> <!-- Aquí se muestra la órbita animada -->
-		<PCHoloCard />
+		<OrbitSkills />
 		<Portfolio />
 		<BlogHome />
 	</main>
-	<Footer/>
+	<Footer />
 </Layout>
