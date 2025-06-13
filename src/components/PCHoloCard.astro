@@ -1,21 +1,20 @@
 ---
 import ProfileCard from './ProfileCard.jsx';
-import '../components/ProfileCard.css'; // Asegúrate de que la ruta sea correcta
-
-const avatarUrl = "/img/Patrick_moño.png"; // Ajusta el path según tu imagen 
+import '../components/ProfileCard.css';
 
 ---
 
-<div class="flex justify-center items-center py-16">
-  <ProfileCard 
-    name="Oscar Amaro"
-    title="Data Something | Actuary"
-    handle="oscar_amaro"
-    status="Online"
-    contactText="Contáctame poner ingles loko"
-    avatarUrl={avatarUrl}
-    showUserInfo={true}
-    enableTilt={true}
-    onContactClick={() => alert('¡Gracias por tu interés!')}
-  />
-</div>
+<ProfileCard 
+  name="Oscar Amaro"
+  title="Data Analyst | Actuary"
+  handle="oscar_amaro"
+  status="Online"
+  contactText="Contáctame"
+  avatarUrl="/img/Patrick_moño.png"        // o la imagen de tu perro 🐶
+  miniAvatarUrl="/img/Patrick_moño.png"
+  grainUrl="photo_card_back.png"           // ⭐ textura holográfica
+  showUserInfo={true}
+  enableTilt={true}
+  onContactClick={() => alert("Gracias por contactarme")}
+  showBehindGradient={false}          // opcional: desactiva fondo animado
+/>
