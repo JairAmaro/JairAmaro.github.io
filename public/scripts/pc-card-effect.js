@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const wrapper = document.querySelector('.pc-card-wrapper');
 
+  if (!wrapper) return;
+
   wrapper.addEventListener('mousemove', (e) => {
     const card = wrapper.querySelector('.pc-card');
     const rect = wrapper.getBoundingClientRect();
