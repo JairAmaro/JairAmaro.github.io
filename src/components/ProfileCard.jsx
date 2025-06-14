@@ -204,14 +204,13 @@ const handlePointerLeave = useCallback((event) => {
   const handleContactClick = useCallback(() => {
     onContactClick?.();
   }, [onContactClick]);
-
+  
   return (
     <div
       ref={wrapRef}
       className={`pc-card-wrapper ${className}`.trim()}
-      style={cardStyle}
     >
-      <section ref={cardRef} className="pc-card">
+      <section ref={cardRef} className="pc-card" style={cardStyle}>
         <div className="pc-inside">
           <div className="pc-shine" />
           <div className="pc-glare" />
@@ -252,6 +251,7 @@ const handlePointerLeave = useCallback((event) => {
   );
 };
 
+// 👇 Aquí estaba el error: esta línea debe estar *fuera* del return
 const ProfileCard = React.memo(ProfileCardComponent);
 
 export default ProfileCard;
