@@ -144,21 +144,24 @@ const ProfileCardComponent = ({
     card.classList.add("active");
   }, [animationHandlers]);
 
-  const handlePointerLeave = useCallback((event) => {
-    const card = cardRef.current;
-    const wrap = wrapRef.current;
-    if (!card || !wrap || !animationHandlers) return;
+const handlePointerLeave = useCallback((event) => {
+  const card = cardRef.current;
+  const wrap = wrapRef.current;
 
-    animationHandlers.createSmoothAnimation(
-      ANIMATION_CONFIG.SMOOTH_DURATION,
-      event.offsetX,
-      event.offsetY,
-      card,
-      wrap
-    );
-    wrap.classList.remove("active");
-    card.classList.remove("active");
-  }, [animationHandlers]);
+  if (!card || !wrap || !animationHandlers) return;
+
+  // ← animación suave de regreso al centro
+  animationHandlers.createSmoothAnimation(
+    ANIMATION_CONFIG.SMOOTH_DURATION,
+    event.offsetX,
+    event.offsetY,
+    card,
+    wrap
+  );
+
+  wrap.classList.remove("active");
+  card.classList.remove("active");
+}, [animationHandlers]);
 
   useEffect(() => {
     if (!enableTilt || !animationHandlers) return;
