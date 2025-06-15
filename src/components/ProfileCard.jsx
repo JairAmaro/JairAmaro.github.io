@@ -20,13 +20,7 @@ const clamp = (value, min = 0, max = 100) =>
 const round = (value, precision = 3) =>
   parseFloat(value.toFixed(precision));
 
-const adjust = (
-  value,
-  fromMin,
-  fromMax,
-  toMin,
-  toMax
-) =>
+const adjust = (value, fromMin, fromMax, toMin, toMax) =>
   round(toMin + ((toMax - toMin) * (value - fromMin)) / (fromMax - fromMin));
 
 const easeInOutCubic = (x) =>
@@ -73,7 +67,11 @@ const ProfileCardComponent = ({
         "--pointer-y": `${percentY}%`,
         "--background-x": `${adjust(percentX, 0, 100, 35, 65)}%`,
         "--background-y": `${adjust(percentY, 0, 100, 35, 65)}%`,
-        "--pointer-from-center": `${clamp(Math.hypot(percentY - 50, percentX - 50) / 50, 0, 1)}`,
+        "--pointer-from-center": `${clamp(
+          Math.hypot(percentY - 50, percentX - 50) / 50,
+          0,
+          1
+        )}`,
         "--pointer-from-top": `${percentY / 100}`,
         "--pointer-from-left": `${percentX / 100}`,
         "--rotate-x": `${round(-(centerX / 10))}deg`,
@@ -144,24 +142,23 @@ const ProfileCardComponent = ({
     card.classList.add("active");
   }, [animationHandlers]);
 
-const handlePointerLeave = useCallback((event) => {
-  const card = cardRef.current;
-  const wrap = wrapRef.current;
+  const handlePointerLeave = useCallback((event) => {
+    const card = cardRef.current;
+    const wrap = wrapRef.current;
 
-  if (!card || !wrap || !animationHandlers) return;
+    if (!card || !wrap || !animationHandlers) return;
 
-  // ← animación suave de regreso al centro
-  animationHandlers.createSmoothAnimation(
-    ANIMATION_CONFIG.SMOOTH_DURATION,
-    event.offsetX,
-    event.offsetY,
-    card,
-    wrap
-  );
+    animationHandlers.createSmoothAnimation(
+      ANIMATION_CONFIG.SMOOTH_DURATION,
+      event.offsetX,
+      event.offsetY,
+      card,
+      wrap
+    );
 
-  wrap.classList.remove("active");
-  card.classList.remove("active");
-}, [animationHandlers]);
+    wrap.classList.remove("active");
+    card.classList.remove("active");
+  }, [animationHandlers]);
 
   useEffect(() => {
     if (!enableTilt || !animationHandlers) return;
@@ -194,33 +191,44 @@ const handlePointerLeave = useCallback((event) => {
     };
   }, [enableTilt, animationHandlers, handlePointerMove, handlePointerEnter, handlePointerLeave]);
 
-  const cardStyle = useMemo(() => ({
-    "--icon": iconUrl ? `url(${iconUrl})` : "none",
-    "--grain": grainUrl ? `url(${grainUrl})` : "none",
-    "--behind-gradient": showBehindGradient ? (behindGradient ?? DEFAULT_BEHIND_GRADIENT) : "none",
-    "--inner-gradient": innerGradient ?? DEFAULT_INNER_GRADIENT,
-  }), [iconUrl, grainUrl, showBehindGradient, behindGradient, innerGradient]);
+  const cardStyle = useMemo(
+    () => ({
+      "--icon": iconUrl ? `url(${iconUrl})` : "none",
+      "--grain": grainUrl ? `url(${grainUrl})` : "none",
+      "--behind-gradient": showBehindGradient
+        ? behindGradient ?? DEFAULT_BEHIND_GRADIENT
+        : "none",
+      "--inner-gradient": innerGradient ?? DEFAULT_INNER_GRADIENT,
+    }),
+    [iconUrl, grainUrl, showBehindGradient, behindGradient, innerGradient]
+  );
 
   const handleContactClick = useCallback(() => {
     onContactClick?.();
   }, [onContactClick]);
-  
+
   return (
-    <div
-      ref={wrapRef}
-      className={`pc-card-wrapper ${className}`.trim()}
-    >
+    <div ref={wrapRef} className={`pc-card-wrapper ${className}`.trim()}>
       <section ref={cardRef} className="pc-card" style={cardStyle}>
         <div className="pc-inside">
           <div className="pc-shine" />
           <div className="pc-glare" />
           <div className="pc-content pc-avatar-content">
-            <img className="avatar" src={avatarUrl} alt={`${name || "User"} avatar`} loading="lazy" />
+            <img
+              className="avatar"
+              src={avatarUrl}
+              alt={`${name || "User"} avatar`}
+              loading="lazy"
+            />
             {showUserInfo && (
               <div className="pc-user-info">
                 <div className="pc-user-details">
                   <div className="pc-mini-avatar">
-                    <img src={miniAvatarUrl || avatarUrl} alt={`${name || "User"} mini avatar`} loading="lazy" />
+                    <img
+                      src={miniAvatarUrl || avatarUrl}
+                      alt={`${name || "User"} mini avatar`}
+                      loading="lazy"
+                    />
                   </div>
                   <div className="pc-user-text">
                     <div className="pc-handle">@{handle}</div>
@@ -251,7 +259,6 @@ const handlePointerLeave = useCallback((event) => {
   );
 };
 
-// 👇 Aquí estaba el error: esta línea debe estar *fuera* del return
 const ProfileCard = React.memo(ProfileCardComponent);
 
 export default ProfileCard;
