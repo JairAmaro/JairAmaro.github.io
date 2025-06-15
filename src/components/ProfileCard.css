@@ -143,7 +143,7 @@
       hsla(0, 0%, 0%, 0.15) 20%,
       hsla(0, 0%, 0%, 0.25) 120%
     );
-  background-position: 0 var(--background-y), var(--background-x) var(--background-y), center;
+  background-position: var(--pointer-x) var(--pointer-y), var(--background-x) var(--background-y), center;
   background-blend-mode: color, hard-light;
   background-size: 500% 500%, 300% 300%, 200% 200%;
   background-repeat: repeat;
