@@ -59,6 +59,7 @@
   transition: transform 1s ease;
   transform: translate3d(0, 0, 0.1px) rotateX(0deg) rotateY(0deg);
   overflow: hidden;
+  background-color: transparent; /* ✅ Asegura fondo transparente */
   z-index: 1;
 }
 
@@ -231,6 +232,19 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
+}
+
+.silk-container {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none; /* ✅ Permite interacción con contenido */
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
 }
 
 @keyframes glow-bg {
