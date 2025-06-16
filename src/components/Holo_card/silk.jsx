@@ -13,8 +13,8 @@ function SilkMaterial({ speed = 5, color = "#7B7481", noiseIntensity = 1.5, rota
   });
 
   return (
-    <mesh ref={meshRef} rotation={[rotation, rotation, 0]}>
-      <planeGeometry args={[2, 2, 256, 256]} />
+    <mesh ref={meshRef} rotation={[0, 0, rotation]}>
+      <planeGeometry args={[1, 1, 256, 256]} />
       <shaderMaterial
         ref={materialRef}
         uniforms={{
@@ -43,25 +43,25 @@ function SilkMaterial({ speed = 5, color = "#7B7481", noiseIntensity = 1.5, rota
           }
         `}
         side={THREE.DoubleSide}
+        transparent={true}
       />
     </mesh>
   );
 }
 
-export default function Silk({ speed, scale, color, noiseIntensity, rotation }) {
+export default function Silk({ speed, scale = 1, color, noiseIntensity, rotation }) {
   return (
-    <div className="silk-container" style={{ position: "absolute", inset: 0, zIndex: 0 }}>
-      <Canvas
-        camera={{ position: [0, 0, 1], fov: 75 }}
-        gl={{ antialias: true, alpha: true }}
-      >
-        <SilkMaterial
-          speed={speed}
-          color={color}
-          noiseIntensity={noiseIntensity}
-          rotation={rotation}
-        />
-      </Canvas>
-    </div>
+    <Canvas
+      style={{ width: "100%", height: "100%", position: "absolute", inset: 0, zIndex: 0 }}
+      camera={{ position: [0, 0, 1], fov: 75 }}
+      gl={{ antialias: true, alpha: true }}
+    >
+      <SilkMaterial
+        speed={speed}
+        color={color}
+        noiseIntensity={noiseIntensity}
+        rotation={rotation}
+      />
+    </Canvas>
   );
 }

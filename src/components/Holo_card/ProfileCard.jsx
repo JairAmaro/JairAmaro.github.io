@@ -205,10 +205,9 @@ const ProfileCardComponent = ({
         style={cardStyle}
       >
         {/* Fondo tipo Silk */}
-        <div className="absolute inset-0 z-0 w-full h-full">
+        <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
           <Silk speed={5} scale={1} color="#7B7481" noiseIntensity={1.5} rotation={0} />
         </div>
-
         {/* Contenido */}
         <div className="pc-inside relative z-10">
           <div className="pc-avatar-content pc-content">
