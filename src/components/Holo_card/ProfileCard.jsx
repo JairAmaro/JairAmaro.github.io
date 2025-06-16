@@ -201,10 +201,9 @@ const ProfileCardComponent = ({
     <div ref={wrapRef} className={`pc-card-wrapper ${className}`.trim()}>
       <section ref={cardRef} className="pc-card relative overflow-hidden" style={cardStyle}>
         {/* Fondo tipo Silk */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 w-full h-full">
           <Silk speed={5} scale={1} color="#7B7481" noiseIntensity={1.5} rotation={0} />
         </div>
-
         {/* Contenido */}
         <div className="pc-inside relative z-10">
           <div className="pc-avatar-content pc-content">
