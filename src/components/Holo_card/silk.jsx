@@ -1,126 +1,270 @@
-/* eslint-disable react/no-unknown-property */
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { forwardRef, useRef, useMemo, useLayoutEffect } from "react";
-import { Color } from "three";
+import React, { useEffect, useRef, useCallback, useMemo } from "react";
+import "./ProfileCard.css";
+import Silk from "./Silk";
 
-const hexToNormalizedRGB = (hex) => {
-  hex = hex.replace("#", "");
-  return [
-    parseInt(hex.slice(0, 2), 16) / 255,
-    parseInt(hex.slice(2, 4), 16) / 255,
-    parseInt(hex.slice(4, 6), 16) / 255,
-  ];
+const DEFAULT_BEHIND_GRADIENT =
+  "radial-gradient(farthest-side circle at var(--pointer-x) var(--pointer-y),hsla(266,100%,90%,var(--card-opacity)) 4%,hsla(266,50%,80%,calc(var(--card-opacity)*0.75)) 10%,hsla(266,25%,70%,calc(var(--card-opacity)*0.5)) 50%,hsla(266,0%,60%,0) 100%),radial-gradient(35% 52% at 55% 20%,#00ffaac4 0%,#073aff00 100%),radial-gradient(100% 100% at 50% 50%,#00c1ffff 1%,#073aff00 76%),conic-gradient(from 124deg at 50% 50%,#c137ffff 0%,#07c6ffff 40%,#07c6ffff 60%,#c137ffff 100%)";
+
+const DEFAULT_INNER_GRADIENT =
+  "linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)";
+
+const ANIMATION_CONFIG = {
+  SMOOTH_DURATION: 600,
+  INITIAL_DURATION: 1500,
+  INITIAL_X_OFFSET: 70,
+  INITIAL_Y_OFFSET: 60,
 };
 
-const vertexShader = `
-  varying vec2 vUv;
-  varying vec3 vPosition;
+const clamp = (value, min = 0, max = 100) =>
+  Math.min(Math.max(value, min), max);
 
-  void main() {
-    vPosition = position;
-    vUv = uv;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-  }
-`;
+const round = (value, precision = 3) =>
+  parseFloat(value.toFixed(precision));
 
-const fragmentShader = `
-  varying vec2 vUv;
-  varying vec3 vPosition;
+const adjust = (value, fromMin, fromMax, toMin, toMax) =>
+  round(toMin + ((toMax - toMin) * (value - fromMin)) / (fromMax - fromMin));
 
-  uniform float uTime;
-  uniform vec3  uColor;
-  uniform float uSpeed;
-  uniform float uScale;
-  uniform float uRotation;
-  uniform float uNoiseIntensity;
+const easeInOutCubic = (x) =>
+  x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
 
-  const float e = 2.71828182845904523536;
-
-  float noise(vec2 texCoord) {
-    float G = e;
-    vec2  r = (G * sin(G * texCoord));
-    return fract(r.x * r.y * (1.0 + texCoord.x));
-  }
-
-  vec2 rotateUvs(vec2 uv, float angle) {
-    float c = cos(angle);
-    float s = sin(angle);
-    mat2  rot = mat2(c, -s, s, c);
-    return rot * uv;
-  }
-
-  void main() {
-    float rnd        = noise(gl_FragCoord.xy);
-    vec2  uv         = rotateUvs(vUv * uScale, uRotation);
-    vec2  tex        = uv * uScale;
-    float tOffset    = uSpeed * uTime;
-
-    tex.y += 0.03 * sin(8.0 * tex.x - tOffset);
-
-    float pattern = 0.6 +
-                    0.4 * sin(5.0 * (tex.x + tex.y +
-                                     cos(3.0 * tex.x + 5.0 * tex.y) +
-                                     0.02 * tOffset) +
-                             sin(20.0 * (tex.x + tex.y - 0.1 * tOffset)));
-
-    vec4 col = vec4(uColor, 1.0) * vec4(pattern) - rnd / 15.0 * uNoiseIntensity;
-    col.a = 1.0;
-    gl_FragColor = col;
-  }
-`;
-
-const SilkPlane = forwardRef(function SilkPlane({ uniforms }, ref) {
-  const { viewport } = useThree();
-
-  useLayoutEffect(() => {
-    if (ref.current) {
-      ref.current.scale.set(viewport.width, viewport.height, 1);
-    }
-  }, [ref, viewport]);
-
-  useFrame((_, delta) => {
-    ref.current.material.uniforms.uTime.value += 0.1 * delta;
-  });
-
-  return (
-    <mesh ref={ref}>
-      <planeGeometry args={[1, 1, 1, 1]} />
-      <shaderMaterial
-        uniforms={uniforms}
-        vertexShader={vertexShader}
-        fragmentShader={fragmentShader}
-      />
-    </mesh>
-  );
-});
-SilkPlane.displayName = "SilkPlane";
-
-const Silk = ({
-  speed = 5,
-  scale = 1,
-  color = "#7B7481",
-  noiseIntensity = 1.5,
-  rotation = 0,
+const ProfileCardComponent = ({
+  avatarUrl,
+  iconUrl,
+  grainUrl,
+  behindGradient,
+  innerGradient,
+  showBehindGradient = true,
+  className = "",
+  enableTilt = true,
+  miniAvatarUrl,
+  name = "Nombre",
+  title = "Subtitulo",
+  handle = "usuario",
+  status = "Online",
+  contactText = "Contact",
+  showUserInfo = true,
+  onContactClick,
 }) => {
-  const meshRef = useRef();
+  const wrapRef = useRef(null);
+  const cardRef = useRef(null);
 
-  const uniforms = useMemo(
+  const animationHandlers = useMemo(() => {
+    if (!enableTilt) return null;
+    let rafId = null;
+
+    const updateCardTransform = (offsetX, offsetY, card, wrap) => {
+      const width = card.clientWidth;
+      const height = card.clientHeight;
+
+      const percentX = clamp((100 / width) * offsetX);
+      const percentY = clamp((100 / height) * offsetY);
+
+      const centerX = percentX - 50;
+      const centerY = percentY - 50;
+
+      const properties = {
+        "--pointer-x": `${percentX}%`,
+        "--pointer-y": `${percentY}%`,
+        "--background-x": `${adjust(percentX, 0, 100, 35, 65)}%`,
+        "--background-y": `${adjust(percentY, 0, 100, 35, 65)}%`,
+        "--pointer-from-center": `${clamp(
+          Math.hypot(percentY - 50, percentX - 50) / 50,
+          0,
+          1
+        )}`,
+        "--pointer-from-top": `${percentY / 100}`,
+        "--pointer-from-left": `${percentX / 100}`,
+        "--rotate-x": `${round(-(centerX / 10))}deg`,
+        "--rotate-y": `${round(centerY / 10)}deg`,
+      };
+
+      Object.entries(properties).forEach(([property, value]) => {
+        wrap.style.setProperty(property, value);
+      });
+    };
+
+    const createSmoothAnimation = (duration, startX, startY, card, wrap) => {
+      const startTime = performance.now();
+      const targetX = wrap.clientWidth / 2;
+      const targetY = wrap.clientHeight / 2;
+
+      const animationLoop = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = clamp(elapsed / duration);
+        const easedProgress = easeInOutCubic(progress);
+
+        const currentX = adjust(easedProgress, 0, 1, startX, targetX);
+        const currentY = adjust(easedProgress, 0, 1, startY, targetY);
+
+        updateCardTransform(currentX, currentY, card, wrap);
+
+        if (progress < 1) {
+          rafId = requestAnimationFrame(animationLoop);
+        }
+      };
+
+      rafId = requestAnimationFrame(animationLoop);
+    };
+
+    return {
+      updateCardTransform,
+      createSmoothAnimation,
+      cancelAnimation: () => {
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
+      },
+    };
+  }, [enableTilt]);
+
+  const handlePointerMove = useCallback((event) => {
+    const card = cardRef.current;
+    const wrap = wrapRef.current;
+    if (!card || !wrap || !animationHandlers) return;
+
+    const rect = card.getBoundingClientRect();
+    animationHandlers.updateCardTransform(
+      event.clientX - rect.left,
+      event.clientY - rect.top,
+      card,
+      wrap
+    );
+  }, [animationHandlers]);
+
+  const handlePointerEnter = useCallback(() => {
+    const card = cardRef.current;
+    const wrap = wrapRef.current;
+    if (!card || !wrap || !animationHandlers) return;
+
+    animationHandlers.cancelAnimation();
+    wrap.classList.add("active");
+    card.classList.add("active");
+  }, [animationHandlers]);
+
+  const handlePointerLeave = useCallback((event) => {
+    const card = cardRef.current;
+    const wrap = wrapRef.current;
+
+    if (!card || !wrap || !animationHandlers) return;
+
+    animationHandlers.createSmoothAnimation(
+      ANIMATION_CONFIG.SMOOTH_DURATION,
+      event.offsetX,
+      event.offsetY,
+      card,
+      wrap
+    );
+
+    wrap.classList.remove("active");
+    card.classList.remove("active");
+  }, [animationHandlers]);
+
+  useEffect(() => {
+    if (!enableTilt || !animationHandlers) return;
+
+    const card = cardRef.current;
+    const wrap = wrapRef.current;
+    if (!card || !wrap) return;
+
+    card.addEventListener("pointerenter", handlePointerEnter);
+    card.addEventListener("pointermove", handlePointerMove);
+    card.addEventListener("pointerleave", handlePointerLeave);
+
+    const initialX = wrap.clientWidth - ANIMATION_CONFIG.INITIAL_X_OFFSET;
+    const initialY = ANIMATION_CONFIG.INITIAL_Y_OFFSET;
+
+    animationHandlers.updateCardTransform(initialX, initialY, card, wrap);
+    animationHandlers.createSmoothAnimation(
+      ANIMATION_CONFIG.INITIAL_DURATION,
+      initialX,
+      initialY,
+      card,
+      wrap
+    );
+
+    return () => {
+      card.removeEventListener("pointerenter", handlePointerEnter);
+      card.removeEventListener("pointermove", handlePointerMove);
+      card.removeEventListener("pointerleave", handlePointerLeave);
+      animationHandlers.cancelAnimation();
+    };
+  }, [enableTilt, animationHandlers, handlePointerMove, handlePointerEnter, handlePointerLeave]);
+
+  const cardStyle = useMemo(
     () => ({
-      uSpeed: { value: speed },
-      uScale: { value: scale },
-      uNoiseIntensity: { value: noiseIntensity },
-      uColor: { value: new Color(...hexToNormalizedRGB(color)) },
-      uRotation: { value: rotation },
-      uTime: { value: 0 },
+      "--icon": iconUrl ? `url(${iconUrl})` : "none",
+      "--grain": grainUrl ? `url(${grainUrl})` : "none",
+      "--behind-gradient": showBehindGradient
+        ? behindGradient ?? DEFAULT_BEHIND_GRADIENT
+        : "none",
+      "--inner-gradient": innerGradient ?? DEFAULT_INNER_GRADIENT,
     }),
-    [speed, scale, noiseIntensity, color, rotation]
+    [iconUrl, grainUrl, showBehindGradient, behindGradient, innerGradient]
   );
 
+  const handleContactClick = useCallback(() => {
+    onContactClick?.();
+  }, [onContactClick]);
+
   return (
-    <Canvas dpr={[1, 2]} frameloop="always">
-      <SilkPlane ref={meshRef} uniforms={uniforms} />
-    </Canvas>
+    <div ref={wrapRef} className={`pc-card-wrapper ${className}`.trim()}>
+      <section ref={cardRef} className="pc-card" style={cardStyle}>
+        {/* 🔮 Fondo tipo Silk */}
+        <Silk
+          speed={5}
+          scale={1}
+          color="#7B7481"
+          noiseIntensity={1.5}
+          rotation={0}
+        />
+
+        {/* 🔲 Contenido de la tarjeta */}
+        <div className="pc-inside">
+          <div className="pc-avatar-content pc-content">
+            <img
+              className="avatar"
+              src={avatarUrl}
+              alt={`${name} avatar`}
+              loading="lazy"
+            />
+            {showUserInfo && (
+              <div className="pc-user-info">
+                <div className="pc-user-details">
+                  <div className="pc-mini-avatar">
+                    <img
+                      src={miniAvatarUrl || avatarUrl}
+                      alt={`${name} mini avatar`}
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="pc-user-text">
+                    <div className="pc-handle">@{handle}</div>
+                    <div className="pc-status">{status}</div>
+                  </div>
+                </div>
+                <button
+                  className="pc-contact-btn"
+                  onClick={handleContactClick}
+                  type="button"
+                  aria-label={`Contact ${name}`}
+                  style={{ pointerEvents: "auto" }}
+                >
+                  {contactText}
+                </button>
+              </div>
+            )}
+          </div>
+          <div className="pc-content pc-details">
+            <h3>{name}</h3>
+            <p>{title}</p>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 
-export default Silk;
+const ProfileCard = React.memo(ProfileCardComponent);
+
+export default ProfileCard;
