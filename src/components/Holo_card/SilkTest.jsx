@@ -1,40 +1,32 @@
-import React from "react";
-import Silk from "./silk";
+import React, { useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
 
-const SilkTest = () => {
+function SpinningCube() {
+  const cubeRef = useRef();
+
+  useFrame(() => {
+    if (cubeRef.current) {
+      cubeRef.current.rotation.x += 0.01;
+      cubeRef.current.rotation.y += 0.01;
+    }
+  });
+
   return (
-    <div
-      style={{
-        position: "relative",
-        width: "400px",
-        height: "400px",
-        border: "2px solid white",
-        overflow: "hidden",
-        margin: "2rem auto",
-      }}
-    >
-      <Silk
-        speed={5}
-        scale={1}
-        color="#7B7481"
-        noiseIntensity={1.5}
-        rotation={0}
-      />
-      <div
-        style={{
-          position: "absolute",
-          zIndex: 1,
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          color: "white",
-          fontWeight: "bold",
-        }}
-      >
-        Fondo Silk Test
-      </div>
+    <mesh ref={cubeRef}>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color="purple" />
+    </mesh>
+  );
+}
+
+export default function SilkTest() {
+  return (
+    <div style={{ width: "100vw", height: "100vh" }}>
+      <Canvas camera={{ position: [2, 2, 2] }}>
+        <ambientLight />
+        <pointLight position={[10, 10, 10]} />
+        <SpinningCube />
+      </Canvas>
     </div>
   );
-};
-
-export default SilkTest;
+}
