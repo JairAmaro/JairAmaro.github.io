@@ -211,6 +211,7 @@ const ProfileCardComponent = ({
     <div ref={wrapRef} className={`pc-card-wrapper ${className}`.trim()}>
       <section ref={cardRef} className="pc-card" style={cardStyle}>
         <div className="pc-inside">
+          <div className="pc-sparkle" />
           <div className="pc-shine" />
           <div className="pc-glare" />
           <div className="pc-content pc-avatar-content">
