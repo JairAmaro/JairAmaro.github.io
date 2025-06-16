@@ -1,0 +1,36 @@
+---
+import ProfileCard from '../Holo_card/ProfileCard.jsx';
+import Silk from '../Holo_card/silk.jsx';
+import '../Holo_card/ProfileCard.css';
+---
+
+<div style="position: relative; width: 100%; height: 100svh; overflow: hidden;">
+  <!-- Fondo animado -->
+  <div style="position: absolute; inset: 0; z-index: 0;">
+    <Silk
+      speed={5}
+      scale={1}
+      color="#7B7481"
+      noiseIntensity={1.5}
+      rotation={0}
+    />
+  </div>
+
+  <!-- Tarjeta de perfil sobre fondo -->
+  <div style="position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; height: 100%;">
+    <ProfileCard 
+      name="Oscar Amaro"
+      title="Data Something | Actuary"
+      handle="oscar_amaro"
+      status="Online"
+      contactText="Contact me"
+      avatarUrl="/img/Patrick_moño.png"
+      miniAvatarUrl="/img/Patrick_moño.png"
+      grainUrl={undefined}
+      showUserInfo={true}
+      enableTilt={true}
+      onContactClick={() => alert("Gracias por contactarme")}
+      showBehindGradient={false} // lo desactivamos porque ya tenemos Silk como fondo
+    />
+  </div>
+</div>
