@@ -10,8 +10,7 @@ import Skills from '../components/skills/Skills.astro';
 import Layout from '../layouts/Layout.astro';
 import OrbitSkills from '../components/OrbitSkills.astro';
 import PCHoloCard from '../components/Holo_card/PCHoloCard.astro';
-
-import SilkTest from "../components/Holo_card/SilkTest.jsx";
+import SilkTest from '../components/Holo_card/SilkTest.jsx';
 
 
 ---
@@ -25,7 +24,7 @@ import SilkTest from "../components/Holo_card/SilkTest.jsx";
 		<section class="my-12 flex justify-center">
 			<PCHoloCard />
 		</section>
-		<SilkTest />
+		<SilkTest client:only="react" />
 		<About />
 		<Skills />
 		<OrbitSkills />
