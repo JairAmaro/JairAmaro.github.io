@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import "./ProfileCard.css";
+import Silk from "./silk"; // ✅ Importa el componente Silk correctamente
 
 const DEFAULT_BEHIND_GRADIENT =
   "radial-gradient(farthest-side circle at var(--pointer-x) var(--pointer-y),hsla(266,100%,90%,var(--card-opacity)) 4%,hsla(266,50%,80%,calc(var(--card-opacity)*0.75)) 10%,hsla(266,25%,70%,calc(var(--card-opacity)*0.5)) 50%,hsla(266,0%,60%,0) 100%),radial-gradient(35% 52% at 55% 20%,#00ffaac4 0%,#073aff00 100%),radial-gradient(100% 100% at 50% 50%,#00c1ffff 1%,#073aff00 76%),conic-gradient(from 124deg at 50% 50%,#c137ffff 0%,#07c6ffff 40%,#07c6ffff 60%,#c137ffff 100%)";
@@ -14,15 +15,10 @@ const ANIMATION_CONFIG = {
   INITIAL_Y_OFFSET: 60,
 };
 
-const clamp = (value, min = 0, max = 100) =>
-  Math.min(Math.max(value, min), max);
-
-const round = (value, precision = 3) =>
-  parseFloat(value.toFixed(precision));
-
+const clamp = (value, min = 0, max = 100) => Math.min(Math.max(value, min), max);
+const round = (value, precision = 3) => parseFloat(value.toFixed(precision));
 const adjust = (value, fromMin, fromMax, toMin, toMax) =>
   round(toMin + ((toMax - toMin) * (value - fromMin)) / (fromMax - fromMin));
-
 const easeInOutCubic = (x) =>
   x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
 
@@ -37,8 +33,8 @@ const ProfileCardComponent = ({
   enableTilt = true,
   miniAvatarUrl,
   name = "Nombre",
-  title = "Subti`",
-  handle = "pronombre",
+  title = "Subtitulo",
+  handle = "usuario",
   status = "Online",
   contactText = "Contact",
   showUserInfo = true,
@@ -49,7 +45,6 @@ const ProfileCardComponent = ({
 
   const animationHandlers = useMemo(() => {
     if (!enableTilt) return null;
-
     let rafId = null;
 
     const updateCardTransform = (offsetX, offsetY, card, wrap) => {
@@ -58,7 +53,6 @@ const ProfileCardComponent = ({
 
       const percentX = clamp((100 / width) * offsetX);
       const percentY = clamp((100 / height) * offsetY);
-
       const centerX = percentX - 50;
       const centerY = percentY - 50;
 
@@ -145,7 +139,6 @@ const ProfileCardComponent = ({
   const handlePointerLeave = useCallback((event) => {
     const card = cardRef.current;
     const wrap = wrapRef.current;
-
     if (!card || !wrap || !animationHandlers) return;
 
     animationHandlers.createSmoothAnimation(
@@ -191,17 +184,14 @@ const ProfileCardComponent = ({
     };
   }, [enableTilt, animationHandlers, handlePointerMove, handlePointerEnter, handlePointerLeave]);
 
-  const cardStyle = useMemo(
-    () => ({
-      "--icon": iconUrl ? `url(${iconUrl})` : "none",
-      "--grain": grainUrl ? `url(${grainUrl})` : "none",
-      "--behind-gradient": showBehindGradient
-        ? behindGradient ?? DEFAULT_BEHIND_GRADIENT
-        : "none",
-      "--inner-gradient": innerGradient ?? DEFAULT_INNER_GRADIENT,
-    }),
-    [iconUrl, grainUrl, showBehindGradient, behindGradient, innerGradient]
-  );
+  const cardStyle = useMemo(() => ({
+    "--icon": iconUrl ? `url(${iconUrl})` : "none",
+    "--grain": grainUrl ? `url(${grainUrl})` : "none",
+    "--behind-gradient": showBehindGradient
+      ? behindGradient ?? DEFAULT_BEHIND_GRADIENT
+      : "none",
+    "--inner-gradient": innerGradient ?? DEFAULT_INNER_GRADIENT,
+  }), [iconUrl, grainUrl, showBehindGradient, behindGradient, innerGradient]);
 
   const handleContactClick = useCallback(() => {
     onContactClick?.();
@@ -210,26 +200,18 @@ const ProfileCardComponent = ({
   return (
     <div ref={wrapRef} className={`pc-card-wrapper ${className}`.trim()}>
       <section ref={cardRef} className="pc-card" style={cardStyle}>
+        {/* 🔮 Fondo tipo Silk */}
+        <Silk speed={5} scale={1} color="#7B7481" noiseIntensity={1.5} rotation={0} />
+
+        {/* 🔲 Contenido de la tarjeta */}
         <div className="pc-inside">
-          <div className="pc-sparkle" />
-          <div className="pc-shine" />
-          <div className="pc-glare" />
-          <div className="pc-content pc-avatar-content">
-            <img
-              className="avatar"
-              src={avatarUrl}
-              alt={`${name || "User"} avatar`}
-              loading="lazy"
-            />
+          <div className="pc-avatar-content pc-content">
+            <img className="avatar" src={avatarUrl} alt={`${name} avatar`} loading="lazy" />
             {showUserInfo && (
               <div className="pc-user-info">
                 <div className="pc-user-details">
                   <div className="pc-mini-avatar">
-                    <img
-                      src={miniAvatarUrl || avatarUrl}
-                      alt={`${name || "User"} mini avatar`}
-                      loading="lazy"
-                    />
+                    <img src={miniAvatarUrl || avatarUrl} alt={`${name} mini avatar`} loading="lazy" />
                   </div>
                   <div className="pc-user-text">
                     <div className="pc-handle">@{handle}</div>
@@ -239,20 +221,18 @@ const ProfileCardComponent = ({
                 <button
                   className="pc-contact-btn"
                   onClick={handleContactClick}
-                  style={{ pointerEvents: "auto" }}
                   type="button"
-                  aria-label={`Contact ${name || "user"}`}
+                  aria-label={`Contact ${name}`}
+                  style={{ pointerEvents: "auto" }}
                 >
                   {contactText}
                 </button>
               </div>
             )}
           </div>
-          <div className="pc-content">
-            <div className="pc-details">
-              <h3>{name}</h3>
-              <p>{title}</p>
-            </div>
+          <div className="pc-content pc-details">
+            <h3>{name}</h3>
+            <p>{title}</p>
           </div>
         </div>
       </section>
@@ -261,5 +241,4 @@ const ProfileCardComponent = ({
 };
 
 const ProfileCard = React.memo(ProfileCardComponent);
-
 export default ProfileCard;
