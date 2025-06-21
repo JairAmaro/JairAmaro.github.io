@@ -17,11 +17,11 @@ const PhotoCard = ({
         {/* Silk background dentro de la tarjeta */}
         <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
           <Silk
-            speed={5}
-            scale={1}
-            color="#7B7481"
-            noiseIntensity={1.5}
-            rotation={0}
+            speed={8}
+            scale={2}
+            color="#1759DE"
+            noiseIntensity={3.9}
+            rotation={4.89}
           />
         </div>
 
@@ -34,28 +34,37 @@ const PhotoCard = ({
             width: "100%",
             textAlign: "center",
             zIndex: 10,
-            fontSize: "1.1rem",
-            fontWeight: "bold",
-            color: "white",
+            fontSize: "1.4rem",
+            fontWeight: "900",
+            color: "#dcdcdc",
             display: "flex",
             justifyContent: "center",
             gap: "0.4ch",
             flexWrap: "wrap",
           }}
         >
-          <span>Data</span>
-          <RotatingText
-            texts={["Analysis", "Engineering", "Science"]}
-            mainClassName=""
-            staggerFrom="last"
-            initial={{ y: "100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "-120%" }}
-            staggerDuration={0.025}
-            splitLevelClassName="overflow-hidden pb-0.5"
-            transition={{ type: "spring", damping: 30, stiffness: 400 }}
-            rotationInterval={2000}
-          />
+          <span style={{ fontWeight: 700 }}>Data</span>
+          <span
+            style={{
+              background: "#6b38fb",
+              color: "white",
+              borderRadius: "8px",
+              padding: "0 0.4em",
+              fontWeight: 800,
+            }}
+          >
+            <RotatingText
+              texts={["Analysis", "Engineering", "Science"]}
+              staggerFrom="last"
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-120%" }}
+              staggerDuration={0.025}
+              splitLevelClassName="overflow-hidden pb-0.5"
+              transition={{ type: "spring", damping: 30, stiffness: 400 }}
+              rotationInterval={2000}
+            />
+          </span>
           <span>| Actuary</span>
         </div>
 
@@ -79,7 +88,8 @@ const PhotoCard = ({
             alt={`${name} avatar`}
             loading="lazy"
             style={{
-              maxHeight: "100%",
+              maxHeight: "75%",
+              width: "auto",
               objectFit: "contain",
             }}
           />
