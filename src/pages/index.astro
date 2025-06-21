@@ -10,9 +10,8 @@ import Skills from '../components/skills/Skills.astro';
 import Layout from '../layouts/Layout.astro';
 import OrbitSkills from '../components/OrbitSkills.astro';
 import PCHoloCard from '../components/Holo_card/PCHoloCard.astro';
-import SilkTest from "../components/Holo_card/SilkTest.jsx";
-
-
+import SilkTest from '../components/Holo_card/SilkTest.jsx';
+import RotatingText from '../components/Holo_card/RotatingText.jsx';
 ---
 
 <Layout title="Oscar Amaro | Actuary | Data Analyst | Data Engineering | Data Scientist">
@@ -20,13 +19,30 @@ import SilkTest from "../components/Holo_card/SilkTest.jsx";
 	<main class="self-center w-full">
 		<Hero />
 
+		<!-- 🔁 TEST DE ROTATING TEXT -->
+		<section class="my-10 text-center text-white text-xl">
+			<div class="flex items-center justify-center gap-2 flex-wrap">
+				<span>Data</span>
+				<RotatingText
+					client:only="react"
+					texts={["Analysis", "Engineering", "Science"]}
+					rotationInterval={1500}
+					staggerDuration={0.03}
+				/>
+				<span>| Actuary</span>
+			</div>
+		</section>
+
 		<!-- 🌟 Tarjeta Holográfica -->
 		<section class="my-12 flex justify-center">
 			<PCHoloCard />
 		</section>
+
+		<!-- Fondo Silk aislado -->
 		<section class="w-full h-screen">
 			<SilkTest client:only="react" />
 		</section>
+
 		<About />
 		<Skills />
 		<OrbitSkills />
