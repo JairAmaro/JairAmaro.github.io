@@ -5,113 +5,78 @@ import "./ProfileCard.css";
 
 const PhotoCard = ({
   avatarUrl = "/img/Patrick_moño.png",
-  name = "Oscar J. Amaro",
-  rotatingTexts = ["Analysis", "Engineering", "Science"],
+  name = "Oscar Amaro",
   handle = "oscar_amaro",
   status = "Online",
   contactText = "Contact me",
   onContactClick,
-  glassColor = "#ffffff22",
-  grayscale = false,
-  silkColor = "#7b7481",
 }) => {
-  const avatarFilter =
-    grayscale === true
-      ? { filter: "grayscale(100%)" }
-      : typeof grayscale === "string"
-      ? {
-          filter: "brightness(0) saturate(100%)",
-          mixBlendMode: "color",
-          backgroundColor: grayscale,
-        }
-      : {};
-
-  const imageStyle = {
-    maxHeight: "32%",
-    width: "auto",
-    objectFit: "contain",
-    borderRadius: "1rem",
-    ...avatarFilter,
-  };
-
   return (
     <div className="pc-card-wrapper">
-      <section
-        className="pc-card relative overflow-hidden"
-        style={{ width: "420px", height: "620px", borderRadius: "1.5rem" }}
-      >
-        {/* Silk background */}
+      <section className="pc-card relative overflow-hidden w-[320px] h-[480px]">
+        {/* Silk background dentro de la tarjeta */}
         <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
           <Silk
             speed={5}
             scale={1}
-            color={silkColor}
-            noiseIntensity={2}
-            rotation={1}
+            color="#7B7481"
+            noiseIntensity={1.5}
+            rotation={0}
           />
         </div>
 
-        {/* Header con texto */}
+        {/* Texto animado arriba */}
         <div
           className="text-zone"
           style={{
             position: "absolute",
-            top: "2.5rem",
+            top: "1.2em",
             width: "100%",
             textAlign: "center",
             zIndex: 10,
+            fontSize: "1.4rem",
             fontWeight: "900",
-            color: "#f0f0f0",
+            color: "#dcdcdc",
             display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "0.6rem",
-            fontFamily: "'Outfit', sans-serif",
+            justifyContent: "center",
+            gap: "0.4ch",
+            flexWrap: "wrap",
           }}
         >
-          <div style={{ fontSize: "2.6rem" }}>{name}</div>
-          <div
+          <span style={{ fontWeight: 700 }}>Data</span>
+          <span
             style={{
-              display: "flex",
-              gap: "0.5ch",
-              alignItems: "center",
-              fontSize: "1.3rem",
-              fontWeight: "600",
+              background: "#6b38fb",
+              color: "white",
+              borderRadius: "8px",
+              padding: "0 0.4em",
+              fontWeight: 800,
             }}
           >
-            <span>Data</span>
-            <span
-              style={{
-                background: "rgba(255,255,255,0.15)",
-                padding: "0.25em 0.6em",
-                borderRadius: "10px",
-                color: "white",
-              }}
-            >
-              <RotatingText
-                texts={rotatingTexts}
-                staggerFrom="last"
-                initial={{ y: "100%" }}
-                animate={{ y: 0 }}
-                exit={{ y: "-120%" }}
-                staggerDuration={0.025}
-                splitLevelClassName="overflow-hidden pb-0.5"
-                transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                rotationInterval={2000}
-              />
-            </span>
-            <span>| Actuary</span>
-          </div>
+            <RotatingText
+              texts={["Analysis", "Engineering", "Science"]}
+              staggerFrom="last"
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-120%" }}
+              staggerDuration={0.025}
+              splitLevelClassName="overflow-hidden pb-0.5"
+              transition={{ type: "spring", damping: 30, stiffness: 400 }}
+              rotationInterval={2000}
+            />
+          </span>
+          <span>| Actuary</span>
         </div>
 
-        {/* Imagen */}
+        {/* Imagen principal */}
         <div
           className="pc-avatar-zone"
           style={{
             position: "absolute",
-            bottom: "6.4rem",
-            left: 0,
-            right: 0,
+            top: "4em",
+            bottom: "5em",
+            left: "0",
+            right: "0",
             zIndex: 5,
             display: "flex",
             justifyContent: "center",
@@ -122,58 +87,31 @@ const PhotoCard = ({
             src={avatarUrl}
             alt={`${name} avatar`}
             loading="lazy"
-            style={imageStyle}
+            style={{
+              maxHeight: "75%",
+              width: "auto",
+              objectFit: "contain",
+            }}
           />
         </div>
 
-        {/* Footer */}
-        <div
-          className="pc-user-info"
-          style={{
-            position: "absolute",
-            bottom: "24px",
-            left: "1rem",
-            right: "1rem",
-            zIndex: 10,
-            backdropFilter: "blur(10px)",
-            backgroundColor: glassColor,
-            borderRadius: "1rem",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "0.6rem 1.2rem",
-            border: "1px solid rgba(255,255,255,0.1)",
-            color: "white",
-            fontFamily: "'Outfit', sans-serif",
-            height: "58px",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
-            <img
-              src={avatarUrl}
-              alt="mini avatar"
-              style={{ width: "26px", height: "26px", borderRadius: "50%" }}
-            />
-            <div style={{ fontSize: "0.85rem", lineHeight: "1.1" }}>
-              <div>@{handle}</div>
-              <div style={{ opacity: 0.75, fontSize: "0.72rem" }}>{status}</div>
+        {/* Footer con contacto */}
+        <div className="pc-user-info" style={{ position: "absolute", bottom: "20px", zIndex: 10 }}>
+          <div className="pc-user-details">
+            <div className="pc-mini-avatar">
+              <img src={avatarUrl} alt={`${name} mini avatar`} loading="lazy" />
+            </div>
+            <div className="pc-user-text">
+              <div className="pc-handle">@{handle}</div>
+              <div className="pc-status">{status}</div>
             </div>
           </div>
           <button
+            className="pc-contact-btn"
             onClick={() => onContactClick?.()}
             type="button"
             aria-label={`Contact ${name}`}
-            style={{
-              padding: "0.4rem 1.2rem",
-              borderRadius: "8px",
-              background: "rgba(255,255,255,0.15)",
-              border: "1px solid rgba(255,255,255,0.2)",
-              color: "white",
-              fontWeight: "600",
-              fontSize: "0.85rem",
-              cursor: "pointer",
-              whiteSpace: "nowrap",
-            }}
+            style={{ pointerEvents: "auto" }}
           >
             {contactText}
           </button>
