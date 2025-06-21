@@ -9,6 +9,7 @@ import '../Holo_card/ProfileCard.css';
     width: 100%;
     height: 100svh;
     overflow: hidden;
+    /* No usar fondo aquí, lo hace Silk dentro del card */
   }
 
   .card-wrapper {
@@ -26,11 +27,14 @@ import '../Holo_card/ProfileCard.css';
     <PhotoCard
       client:only="react"
       avatarUrl="/img/Patrick_moño.png"
-      name="Oscar Amaro"
+      name="Oscar J. Amaro"
+      rotatingTexts={["Analysis", "Engineering", "Science"]}
       handle="oscar_amaro"
       status="Online"
       contactText="Contact me"
-      onContactClick={() => alert('Gracias por contactarme')}
+      grayscale={false}              
+      glassColor="#ffffff22"
+      onContactClick={() => alert("Gracias por contactarme")}
     />
   </div>
 </div>
