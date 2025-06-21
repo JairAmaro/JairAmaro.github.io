@@ -6,17 +6,16 @@ import "./ProfileCard.css";
 const PhotoCard = ({
   avatarUrl = "/img/Patrick_moño.png",
   name = "Oscar J. Amaro",
-  rotatingTexts = ["Data Analyst", "Data Engineer", "AI Builder"],
+  rotatingTexts = ["Analysis", "Engineering", "Science"],
   handle = "oscar_amaro",
   status = "Online",
   contactText = "Contact me",
   onContactClick,
-  glassColor = "#ffffff22", // background color for contact box
+  glassColor = "#ffffff22",
   grayscale = false,
 }) => {
-  // 🎨 Define color constants with hex codes for editor color picker
-  const silkColor = "#3f3c9e"; // Silk background
-  const textBgColor = "#ffffff22"; // Background for rotating text
+  const silkColor = "#3f3c9e";
+  const textBgColor = "#ffffff22";
   const avatarFilter =
     grayscale === true
       ? { filter: "grayscale(100%)" }
@@ -42,7 +41,7 @@ const PhotoCard = ({
         className="pc-card relative overflow-hidden"
         style={{ width: "400px", height: "520px", borderRadius: "1.5rem" }}
       >
-        {/* Fondo Silk animado */}
+        {/* Silk background */}
         <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
           <Silk
             speed={5}
@@ -53,7 +52,7 @@ const PhotoCard = ({
           />
         </div>
 
-        {/* Nombre y texto animado */}
+        {/* Name and rotating text */}
         <div
           className="text-zone"
           style={{
@@ -62,7 +61,6 @@ const PhotoCard = ({
             width: "100%",
             textAlign: "center",
             zIndex: 10,
-            fontSize: "1.6rem",
             fontWeight: "900",
             color: "#f0f0f0",
             display: "flex",
@@ -72,32 +70,42 @@ const PhotoCard = ({
             fontFamily: "'Outfit', sans-serif",
           }}
         >
-          <div>{name}</div>
+          <div style={{ fontSize: "1.8rem" }}>{name}</div>
           <div
             style={{
-              background: textBgColor,
-              padding: "0.25em 0.6em",
-              borderRadius: "10px",
+              display: "flex",
+              gap: "0.5ch",
+              alignItems: "center",
               fontSize: "1rem",
-              fontWeight: "500",
-              color: "white",
+              fontWeight: "600",
             }}
           >
-            <RotatingText
-              texts={rotatingTexts}
-              staggerFrom="last"
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "-120%" }}
-              staggerDuration={0.025}
-              splitLevelClassName="overflow-hidden pb-0.5"
-              transition={{ type: "spring", damping: 30, stiffness: 400 }}
-              rotationInterval={2000}
-            />
+            <span>Data</span>
+            <span
+              style={{
+                background: textBgColor,
+                padding: "0.25em 0.6em",
+                borderRadius: "10px",
+                color: "white",
+              }}
+            >
+              <RotatingText
+                texts={rotatingTexts}
+                staggerFrom="last"
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "-120%" }}
+                staggerDuration={0.025}
+                splitLevelClassName="overflow-hidden pb-0.5"
+                transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                rotationInterval={2000}
+              />
+            </span>
+            <span>| Actuary</span>
           </div>
         </div>
 
-        {/* Imagen centrada abajo */}
+        {/* Centered image */}
         <div
           className="pc-avatar-zone"
           style={{
@@ -119,7 +127,7 @@ const PhotoCard = ({
           />
         </div>
 
-        {/* Footer de contacto */}
+        {/* Contact footer */}
         <div
           className="pc-user-info"
           style={{
