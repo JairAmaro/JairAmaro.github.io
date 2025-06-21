@@ -13,9 +13,8 @@ const PhotoCard = ({
   onContactClick,
   glassColor = "#ffffff22",
   grayscale = false,
-  silkColor = "#3f3c9e",
+  silkColor = "#7b7481",
 }) => {
-  const textBgColor = "#ffffff22";
   const avatarFilter =
     grayscale === true
       ? { filter: "grayscale(100%)" }
@@ -28,7 +27,7 @@ const PhotoCard = ({
       : {};
 
   const imageStyle = {
-    maxHeight: "42%", // más pequeño
+    maxHeight: "32%",
     width: "auto",
     objectFit: "contain",
     borderRadius: "1rem",
@@ -39,25 +38,25 @@ const PhotoCard = ({
     <div className="pc-card-wrapper">
       <section
         className="pc-card relative overflow-hidden"
-        style={{ width: "420px", height: "540px", borderRadius: "1.5rem" }}
+        style={{ width: "420px", height: "620px", borderRadius: "1.5rem" }}
       >
         {/* Silk background */}
         <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
           <Silk
             speed={5}
-            scale={2.3}
+            scale={1}
             color={silkColor}
-            noiseIntensity={1.5}
-            rotation={2.5}
+            noiseIntensity={2}
+            rotation={1}
           />
         </div>
 
-        {/* Name and rotating text */}
+        {/* Header con texto */}
         <div
           className="text-zone"
           style={{
             position: "absolute",
-            top: "2rem",
+            top: "2.5rem",
             width: "100%",
             textAlign: "center",
             zIndex: 10,
@@ -66,24 +65,24 @@ const PhotoCard = ({
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: "0.5rem",
+            gap: "0.6rem",
             fontFamily: "'Outfit', sans-serif",
           }}
         >
-          <div style={{ fontSize: "1.9rem" }}>{name}</div>
+          <div style={{ fontSize: "2.6rem" }}>{name}</div>
           <div
             style={{
               display: "flex",
               gap: "0.5ch",
               alignItems: "center",
-              fontSize: "1rem",
+              fontSize: "1.3rem",
               fontWeight: "600",
             }}
           >
             <span>Data</span>
             <span
               style={{
-                background: textBgColor,
+                background: "rgba(255,255,255,0.15)",
                 padding: "0.25em 0.6em",
                 borderRadius: "10px",
                 color: "white",
@@ -105,40 +104,34 @@ const PhotoCard = ({
           </div>
         </div>
 
-        {/* Centered image - adjusted for better layout */}
+        {/* Imagen */}
         <div
-        className="pc-avatar-zone"
-        style={{
+          className="pc-avatar-zone"
+          style={{
             position: "absolute",
-            bottom: "4.1rem", // lo acercamos al footer
+            bottom: "6.4rem",
             left: 0,
             right: 0,
             zIndex: 5,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-        }}
+          }}
         >
-        <img
+          <img
             src={avatarUrl}
             alt={`${name} avatar`}
             loading="lazy"
-            style={{
-            maxHeight: "38%", // más pequeño aún
-            width: "auto",
-            objectFit: "contain",
-            borderRadius: "1rem",
-            ...avatarFilter,
-            }}
-        />
+            style={imageStyle}
+          />
         </div>
 
-        {/* Contact footer */}
+        {/* Footer */}
         <div
           className="pc-user-info"
           style={{
             position: "absolute",
-            bottom: "20px",
+            bottom: "24px",
             left: "1rem",
             right: "1rem",
             zIndex: 10,
@@ -148,27 +141,22 @@ const PhotoCard = ({
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            padding: "0.4rem 1rem",
+            padding: "0.6rem 1.2rem",
             border: "1px solid rgba(255,255,255,0.1)",
             color: "white",
             fontFamily: "'Outfit', sans-serif",
-            height: "48px",
+            height: "58px",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
             <img
               src={avatarUrl}
               alt="mini avatar"
-              style={{
-                width: "22px",
-                height: "22px",
-                borderRadius: "50%",
-                objectFit: "cover",
-              }}
+              style={{ width: "26px", height: "26px", borderRadius: "50%" }}
             />
-            <div style={{ fontSize: "0.75rem", lineHeight: "1" }}>
-              <div style={{ fontWeight: 500 }}>@{handle}</div>
-              <div style={{ opacity: 0.7, fontSize: "0.65rem" }}>{status}</div>
+            <div style={{ fontSize: "0.85rem", lineHeight: "1.1" }}>
+              <div>@{handle}</div>
+              <div style={{ opacity: 0.75, fontSize: "0.72rem" }}>{status}</div>
             </div>
           </div>
           <button
@@ -176,13 +164,13 @@ const PhotoCard = ({
             type="button"
             aria-label={`Contact ${name}`}
             style={{
-              padding: "0.3rem 0.9rem",
+              padding: "0.4rem 1.2rem",
               borderRadius: "8px",
               background: "rgba(255,255,255,0.15)",
               border: "1px solid rgba(255,255,255,0.2)",
               color: "white",
               fontWeight: "600",
-              fontSize: "0.75rem",
+              fontSize: "0.85rem",
               cursor: "pointer",
               whiteSpace: "nowrap",
             }}
