@@ -105,26 +105,32 @@ const PhotoCard = ({
           </div>
         </div>
 
-        {/* Centered image */}
+        {/* Centered image - adjusted for better layout */}
         <div
-          className="pc-avatar-zone"
-          style={{
+        className="pc-avatar-zone"
+        style={{
             position: "absolute",
-            bottom: "5.2rem",
+            bottom: "4.1rem", // lo acercamos al footer
             left: 0,
             right: 0,
             zIndex: 5,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-          }}
+        }}
         >
-          <img
+        <img
             src={avatarUrl}
             alt={`${name} avatar`}
             loading="lazy"
-            style={imageStyle}
-          />
+            style={{
+            maxHeight: "38%", // más pequeño aún
+            width: "auto",
+            objectFit: "contain",
+            borderRadius: "1rem",
+            ...avatarFilter,
+            }}
+        />
         </div>
 
         {/* Contact footer */}
