@@ -1,5 +1,5 @@
 ---
-import ProfileCard from '../Holo_card/ProfileCard.jsx';
+import PhotoCard from '../Holo_card/PhotoCard.jsx';
 import Silk from '../Holo_card/silk.jsx';
 import '../Holo_card/ProfileCard.css';
 ---
@@ -16,21 +16,15 @@ import '../Holo_card/ProfileCard.css';
     />
   </div>
 
-  <!-- Tarjeta de perfil sobre fondo -->
+  <!-- Tarjeta encima del fondo -->
   <div style="position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; height: 100%;">
-    <ProfileCard 
+    <PhotoCard
+      avatarUrl="/img/Patrick_moño.png"
       name="Oscar Amaro"
-      title="Data Something | Actuary"
       handle="oscar_amaro"
       status="Online"
       contactText="Contact me"
-      avatarUrl="/img/Patrick_moño.png"
-      miniAvatarUrl="/img/Patrick_moño.png"
-      grainUrl={undefined}
-      showUserInfo={true}
-      enableTilt={true}
-      onContactClick={() => alert("Gracias por contactarme")}
-      showBehindGradient={false} // lo desactivamos porque ya tenemos Silk como fondo
+      onContactClick={() => alert('Gracias por contactarme')}
     />
   </div>
 </div>
