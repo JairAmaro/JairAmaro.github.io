@@ -1,8 +1,8 @@
 import React from "react";
-import "./ProfileCard.css"; // reutilizamos estilos generales
+import RotatingText from "./RotatingText";
+import "./ProfileCard.css";
 
 const PhotoCard = ({
-  title = "Data Science | Actuary",
   avatarUrl = "/img/Patrick_moño.png",
   name = "Oscar Amaro",
   handle = "oscar_amaro",
@@ -13,7 +13,7 @@ const PhotoCard = ({
   return (
     <div className="pc-card-wrapper">
       <section className="pc-card relative overflow-hidden w-[320px] h-[480px]">
-        {/* Texto superior */}
+        {/* Texto animado superior */}
         <div
           className="text-zone"
           style={{
@@ -22,12 +22,29 @@ const PhotoCard = ({
             width: "100%",
             textAlign: "center",
             zIndex: 10,
-            fontSize: "1.2rem",
+            fontSize: "1.1rem",
             fontWeight: "bold",
             color: "white",
+            display: "flex",
+            justifyContent: "center",
+            gap: "0.4ch",
+            flexWrap: "wrap",
           }}
         >
-          {title}
+          <span>Data</span>
+          <RotatingText
+            texts={["Analysis", "Engineering", "Science"]}
+            mainClassName=""
+            staggerFrom="last"
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-120%" }}
+            staggerDuration={0.025}
+            splitLevelClassName="overflow-hidden pb-0.5"
+            transition={{ type: "spring", damping: 30, stiffness: 400 }}
+            rotationInterval={2000}
+          />
+          <span>| Actuary</span>
         </div>
 
         {/* Imagen principal */}
