@@ -28,7 +28,7 @@ const PhotoCard = ({
       : {};
 
   const imageStyle = {
-    maxHeight: "52%",
+    maxHeight: "55%",
     width: "auto",
     objectFit: "contain",
     borderRadius: "1rem",
@@ -57,8 +57,8 @@ const PhotoCard = ({
           className="text-zone"
           style={{
             position: "absolute",
-            top: "1.6rem",
-            width: "100%,",
+            top: "2rem",
+            width: "100%",
             textAlign: "center",
             zIndex: 10,
             fontWeight: "900",
@@ -66,17 +66,17 @@ const PhotoCard = ({
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: "0.35rem",
+            gap: "0.5rem",
             fontFamily: "'Outfit', sans-serif",
           }}
         >
-          <div style={{ fontSize: "1.75rem" }}>{name}</div>
+          <div style={{ fontSize: "1.8rem" }}>{name}</div>
           <div
             style={{
               display: "flex",
-              gap: "0.4ch",
+              gap: "0.5ch",
               alignItems: "center",
-              fontSize: "0.95rem",
+              fontSize: "1rem",
               fontWeight: "600",
             }}
           >
@@ -84,8 +84,8 @@ const PhotoCard = ({
             <span
               style={{
                 background: textBgColor,
-                padding: "0.2em 0.6em",
-                borderRadius: "9999px",
+                padding: "0.25em 0.6em",
+                borderRadius: "10px",
                 color: "white",
               }}
             >
@@ -110,7 +110,7 @@ const PhotoCard = ({
           className="pc-avatar-zone"
           style={{
             position: "absolute",
-            bottom: "7.8rem",
+            bottom: "6.5rem",
             left: 0,
             right: 0,
             zIndex: 5,
@@ -142,17 +142,18 @@ const PhotoCard = ({
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            padding: "0.65rem 1rem",
+            padding: "0.6rem 1.2rem",
             border: "1px solid rgba(255,255,255,0.1)",
             color: "white",
             fontFamily: "'Outfit', sans-serif",
+            height: "62px",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
             <img
               src={avatarUrl}
               alt="mini avatar"
-              style={{ width: "32px", height: "32px", borderRadius: "50%" }}
+              style={{ width: "30px", height: "30px", borderRadius: "50%" }}
             />
             <div style={{ display: "flex", flexDirection: "column", fontSize: "0.8rem" }}>
               <span>@{handle}</span>
@@ -164,7 +165,7 @@ const PhotoCard = ({
             type="button"
             aria-label={`Contact ${name}`}
             style={{
-              padding: "0.45rem 0.9rem",
+              padding: "0.4rem 1.2rem",
               borderRadius: "8px",
               background: "rgba(255,255,255,0.15)",
               border: "1px solid rgba(255,255,255,0.2)",
