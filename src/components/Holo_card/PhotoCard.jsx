@@ -1,5 +1,6 @@
 import React from "react";
 import RotatingText from "./RotatingText";
+import Silk from "./silk";
 import "./ProfileCard.css";
 
 const PhotoCard = ({
@@ -13,6 +14,17 @@ const PhotoCard = ({
   return (
     <div className="pc-card-wrapper">
       <section className="pc-card relative overflow-hidden w-[320px] h-[480px]">
+        {/* Silk background dentro de la tarjeta */}
+        <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
+          <Silk
+            speed={5}
+            scale={1}
+            color="#7B7481"
+            noiseIntensity={1.5}
+            rotation={0}
+          />
+        </div>
+
         {/* Texto animado arriba */}
         <div
           className="text-zone"
@@ -56,7 +68,7 @@ const PhotoCard = ({
             bottom: "5em",
             left: "0",
             right: "0",
-            zIndex: 5, // Entre fondo (0) y contenido (10)
+            zIndex: 5,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
