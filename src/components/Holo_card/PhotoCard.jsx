@@ -13,7 +13,7 @@ const PhotoCard = ({
   onContactClick,
   glassColor = "#ffffff22",
   grayscale = false,
-  silkColor ="rgb(110, 37, 147)",
+  silkColor = "#3f3c9e",
 }) => {
   const textBgColor = "#ffffff22";
   const avatarFilter =
