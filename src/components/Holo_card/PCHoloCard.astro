@@ -31,9 +31,10 @@ import '../Holo_card/ProfileCard.css';
 </style>
 
 <div class="page-container">
-  <!-- Fondo Silk -->
+  <!-- Fondo Silk (montado en cliente) -->
   <div class="silk-bg">
     <Silk
+      client:only="react"
       speed={5}
       scale={1}
       color="#7B7481"
@@ -42,7 +43,7 @@ import '../Holo_card/ProfileCard.css';
     />
   </div>
 
-  <!-- Tarjeta montada en cliente -->
+  <!-- Tarjeta (montada en cliente también) -->
   <div class="card-wrapper">
     <PhotoCard
       client:only="react"
