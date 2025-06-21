@@ -13,7 +13,7 @@ const PhotoCard = ({
   return (
     <div className="pc-card-wrapper">
       <section className="pc-card relative overflow-hidden w-[320px] h-[480px]">
-        {/* Texto animado superior */}
+        {/* Texto animado arriba */}
         <div
           className="text-zone"
           style={{
@@ -49,20 +49,32 @@ const PhotoCard = ({
 
         {/* Imagen principal */}
         <div
-          className="pc-avatar-content pc-content"
-          style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+          className="pc-avatar-zone"
+          style={{
+            position: "absolute",
+            top: "4em",
+            bottom: "5em",
+            left: "0",
+            right: "0",
+            zIndex: 5, // Entre fondo (0) y contenido (10)
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
           <img
-            className="avatar"
             src={avatarUrl}
             alt={`${name} avatar`}
             loading="lazy"
-            style={{ maxHeight: "80%", objectFit: "contain" }}
+            style={{
+              maxHeight: "100%",
+              objectFit: "contain",
+            }}
           />
         </div>
 
         {/* Footer con contacto */}
-        <div className="pc-user-info" style={{ position: "absolute", bottom: "20px" }}>
+        <div className="pc-user-info" style={{ position: "absolute", bottom: "20px", zIndex: 10 }}>
           <div className="pc-user-details">
             <div className="pc-mini-avatar">
               <img src={avatarUrl} alt={`${name} mini avatar`} loading="lazy" />

@@ -4,9 +4,35 @@ import Silk from '../Holo_card/silk.jsx';
 import '../Holo_card/ProfileCard.css';
 ---
 
-<div style="position: relative; width: 100%; height: 100svh; overflow: hidden;">
-  <!-- Fondo animado -->
-  <div style="position: absolute; inset: 0; z-index: 0;">
+<style>
+  .silk-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .page-container {
+    position: relative;
+    width: 100%;
+    height: 100svh;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  .card-wrapper {
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+
+<div class="page-container">
+  <!-- Fondo Silk -->
+  <div class="silk-bg">
     <Silk
       speed={5}
       scale={1}
@@ -16,8 +42,8 @@ import '../Holo_card/ProfileCard.css';
     />
   </div>
 
-  <!-- Tarjeta encima del fondo -->
-  <div style="position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; height: 100%;">
+  <!-- Tarjeta -->
+  <div class="card-wrapper">
     <PhotoCard
       avatarUrl="/img/Patrick_moño.png"
       name="Oscar Amaro"
