@@ -69,13 +69,13 @@ const PhotoCard = ({
           <span>| Actuary</span>
         </div>
 
-        {/* Imagen principal */}
+        {/* Imagen principal (donde esta patrick) */}
         <div
           className="pc-avatar-zone"
           style={{
             position: "absolute",
-            top: "4em",
-            bottom: "5em",
+            top: "6.5em",
+            bottom: "4em",
             left: "0",
             right: "0",
             zIndex: 5,
