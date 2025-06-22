@@ -13,7 +13,7 @@ const PhotoCard = ({
 }) => {
   return (
     <div className="pc-card-wrapper">
-      <section className="pc-card relative overflow-hidden w-[320px] h-[480px]">
+      <section className="pc-card relative overflow-hidden w-[360px] h-[480px]">
         {/* Silk background dentro de la tarjeta */}
         <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
           <Silk
