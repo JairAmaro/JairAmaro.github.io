@@ -74,7 +74,7 @@ const PhotoCard = ({
           className="pc-avatar-zone"
           style={{
             position: "absolute",
-            top: "6.5em",
+            top: "8.5em",
             bottom: "4em",
             left: "0",
             right: "0",
