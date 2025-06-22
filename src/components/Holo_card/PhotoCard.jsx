@@ -69,7 +69,8 @@ const PhotoCard = ({
           <span>| Actuary</span>
         </div>
 
-        {/* Imagen principal (donde esta patrick) */}
+        {/* Imagen principal (donde esta patrick)
+        Top 16em entre mas garnde mas baja la imagen */}
         <div
           className="pc-avatar-zone"
           style={{
@@ -89,7 +90,7 @@ const PhotoCard = ({
             alt={`${name} avatar`}
             loading="lazy"
             style={{
-              maxHeight: "75%",
+              maxHeight: "85%", // tamaño de la imagen 
               width: "auto",
               objectFit: "contain",
             }}
