@@ -26,7 +26,7 @@ const PhotoCard = ({
           />
         </div>
 
-        {/* Texto animado arriba */}
+        {/* Texto animado arriba Oscar J Amaro */}
         <div
         className="text-zone"
         style={{
@@ -43,13 +43,13 @@ const PhotoCard = ({
           gap: "0.4rem",
         }}
       >
-        <div style={{ fontSize: "2rem", fontWeight: 700 }}>Oscar J. Amaro</div>
+        <div style={{ fontSize: "4rem", fontWeight: 700 }}>Oscar J. Amaro</div>
         <div
           style={{
             display: "flex",
             alignItems: "center",
             gap: "0.4ch",
-            fontSize: "1.1rem",
+            fontSize: "2rem",
             fontWeight: 500,
           }}
         >
@@ -78,8 +78,6 @@ const PhotoCard = ({
           <span>| Actuary</span>
         </div>
       </div>
-
-
 
         {/* Imagen principal (donde esta patrick)
         Top 16em entre mas garnde mas baja la imagen */}
