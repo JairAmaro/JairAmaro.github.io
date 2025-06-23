@@ -3,9 +3,9 @@
   flex-wrap: wrap;
   white-space: pre-wrap;
   position: relative;
-  font-family: 'Outfit', sans-serif; /* ✅ Aplica la fuente aquí */
+  font-family: 'Outfit', sans-serif;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1em;
   color: white;
 }
 
@@ -23,7 +23,6 @@
 
 .text-rotate-word {
   display: inline-flex;
-  font-family: inherit;
 }
 
 .text-rotate-lines {
@@ -34,16 +33,8 @@
 
 .text-rotate-element {
   display: inline-block;
-  font-family: inherit;
 }
 
 .text-rotate-space {
   white-space: pre;
 }
-
-.text-rotate-element-uniform {
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: 1;
-}
-

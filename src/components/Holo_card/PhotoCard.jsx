@@ -43,32 +43,27 @@ const PhotoCard = ({
             gap: "0.4rem",
           }}
         >
-          {/* Nombre */}
           <div style={{ fontSize: "4rem", fontWeight: 700 }}>Oscar J. Amaro</div>
-
-          {/* Línea con texto animado */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
               gap: "0.4ch",
-              fontSize: "2rem",
-              fontWeight: 500,
+              fontSize: "2rem", // <- Esto controla el tamaño general
+              fontWeight: 600,
             }}
           >
             <span>Data</span>
             <span
               style={{
                 backgroundColor: "rgba(255, 255, 255, 0.15)",
-                borderRadius: "12px",      // bordes redondeados
-                padding: "0.25em 0.8em",   // padding ajustado
+                padding: "0.2em 0.7em", // ✅ Ajuste del cuadro translúcido
                 color: "#fff",
                 backdropFilter: "blur(6px)",
-                fontSize: "inherit",       // asegura tamaño uniforme
-                fontWeight: "inherit",     // asegura peso uniforme
-                lineHeight: "1",           // mejora alineación vertical
-                display: "flex",           // centra el texto internamente
-                alignItems: "center",      // centra verticalmente
+                fontFamily: "'Outfit', sans-serif",
+                fontWeight: 600,
+                fontSize: "inherit",
+                lineHeight: 1.1,
               }}
             >
               <RotatingText
@@ -81,7 +76,6 @@ const PhotoCard = ({
                 splitLevelClassName="overflow-hidden pb-0.5"
                 transition={{ type: "spring", damping: 30, stiffness: 400 }}
                 rotationInterval={2000}
-                elementLevelClassName="text-rotate-element-uniform"
               />
             </span>
             <span>| Actuary</span>
