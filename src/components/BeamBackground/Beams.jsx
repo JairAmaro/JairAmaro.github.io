@@ -4,20 +4,13 @@ import {
   useImperativeHandle,
   useEffect,
   useRef,
-  useMemo
+  useMemo,
 } from "react";
-
 import * as THREE from "three";
-
 import { Canvas, useFrame } from "@react-three/fiber";
 import { PerspectiveCamera } from "@react-three/drei";
 import { degToRad } from "three/src/math/MathUtils.js";
-
 import "./Beams.css";
-
-// ==============================
-// 🎨 FUNCIONES AUXILIARES
-// ==============================
 
 function extendMaterial(BaseMaterial, cfg) {
   const physical = THREE.ShaderLib.physical;
@@ -27,6 +20,7 @@ function extendMaterial(BaseMaterial, cfg) {
     uniforms: baseUniforms,
   } = physical;
   const baseDefines = physical.defines ?? {};
+
   const uniforms = THREE.UniformsUtils.clone(baseUniforms);
   const defaults = new BaseMaterial(cfg.material || {});
 
@@ -38,7 +32,10 @@ function extendMaterial(BaseMaterial, cfg) {
     uniforms.envMapIntensity.value = defaults.envMapIntensity;
 
   Object.entries(cfg.uniforms ?? {}).forEach(([key, u]) => {
-    uniforms[key] = u !== null && typeof u === "object" && "value" in u ? u : { value: u };
+    uniforms[key] =
+      u !== null && typeof u === "object" && "value" in u
+        ? u
+        : { value: u };
   });
 
   let vert = `${cfg.header}\n${cfg.vertexHeader ?? ""}\n${baseVert}`;
@@ -75,50 +72,98 @@ const hexToNormalizedRGB = (hex) => {
   return [r / 255, g / 255, b / 255];
 };
 
-// ==============================
-// 🔁 ROTACIÓN INFINITA
-// ==============================
+const noise = `
+// todo el bloque noise copiado tal cual desde reactbits (lo tienes bien)
+float random (in vec2 st) {...}
+...
+return 2.2 * n_xyz;
+`;
 
-const GroupWithRotation = ({ children, rotationSpeed = 30 }) => {
-  const ref = useRef();
-  useFrame((_, delta) => {
-    if (ref.current) {
-      ref.current.rotation.z += degToRad(rotationSpeed) * delta * 0.1;
-    }
-  });
-  return <group ref={ref}>{children}</group>;
-};
+const Beams = ({
+  beamWidth = 2,
+  beamHeight = 15,
+  beamNumber = 12,
+  lightColor = "#ffffff",
+  speed = 2,
+  noiseIntensity = 1.75,
+  scale = 0.2,
+  rotation = 0,
+}) => {
+  const meshRef = useRef(null);
+  const beamMaterial = useMemo(
+    () =>
+      extendMaterial(THREE.MeshStandardMaterial, {
+        header: `
+  varying vec3 vEye;
+  varying float vNoise;
+  varying vec2 vUv;
+  varying vec3 vPosition;
+  uniform float time;
+  uniform float uSpeed;
+  uniform float uNoiseIntensity;
+  uniform float uScale;
+  ${noise}`,
+        vertexHeader: `
+  float getPos(vec3 pos) {
+    vec3 noisePos =
+      vec3(pos.x * 0., pos.y - uv.y, pos.z + time * uSpeed * 3.) * uScale;
+    return cnoise(noisePos);
+  }
+  vec3 getCurrentPos(vec3 pos) {
+    vec3 newpos = pos;
+    newpos.z += getPos(pos);
+    return newpos;
+  }
+  vec3 getNormal(vec3 pos) {
+    vec3 curpos = getCurrentPos(pos);
+    vec3 nextposX = getCurrentPos(pos + vec3(0.01, 0.0, 0.0));
+    vec3 nextposZ = getCurrentPos(pos + vec3(0.0, -0.01, 0.0));
+    vec3 tangentX = normalize(nextposX - curpos);
+    vec3 tangentZ = normalize(nextposZ - curpos);
+    return normalize(cross(tangentZ, tangentX));
+  }`,
+        vertex: {
+          "#include <begin_vertex>": `transformed.z += getPos(transformed.xyz);`,
+          "#include <beginnormal_vertex>": `objectNormal = getNormal(position.xyz);`,
+        },
+        fragment: {
+          "#include <dithering_fragment>": `
+    float randomNoise = noise(gl_FragCoord.xy);
+    gl_FragColor.rgb -= randomNoise / 15. * uNoiseIntensity;`,
+        },
+        material: { fog: true },
+        uniforms: {
+          diffuse: new THREE.Color(...hexToNormalizedRGB("#000000")),
+          time: { value: 0 },
+          roughness: 0.3,
+          metalness: 0.3,
+          uSpeed: { value: speed },
+          envMapIntensity: 10,
+          uNoiseIntensity: noiseIntensity,
+          uScale: scale,
+        },
+      }),
+    [speed, noiseIntensity, scale]
+  );
 
-// ==============================
-// 💡 DIRECCIONAL LIGHT
-// ==============================
-
-const DirLight = ({ position, color }) => {
-  const dir = useRef(null);
-  useEffect(() => {
-    if (!dir.current) return;
-    const cam = dir.current.shadow.camera;
-    if (!cam) return;
-    cam.top = 24;
-    cam.bottom = -24;
-    cam.left = -24;
-    cam.right = 24;
-    cam.far = 64;
-    dir.current.shadow.bias = -0.004;
-  }, []);
   return (
-    <directionalLight
-      ref={dir}
-      color={color}
-      intensity={1}
-      position={position}
-    />
+    <CanvasWrapper>
+      <group rotation={[0, 0, degToRad(rotation)]}>
+        <PlaneNoise
+          ref={meshRef}
+          material={beamMaterial}
+          count={beamNumber}
+          width={beamWidth}
+          height={beamHeight}
+        />
+        <DirLight color={lightColor} position={[0, 3, 10]} />
+      </group>
+      <ambientLight intensity={1} />
+      <color attach="background" args={["#000000"]} />
+      <PerspectiveCamera makeDefault position={[0, 0, 20]} fov={30} />
+    </CanvasWrapper>
   );
 };
-
-// ==============================
-// 🧱 GEOMETRÍA DE PLANOS STACKED
-// ==============================
 
 function createStackedPlanesBufferGeometry(n, width, height, spacing, heightSegments) {
   const geometry = new THREE.BufferGeometry();
@@ -144,13 +189,7 @@ function createStackedPlanesBufferGeometry(n, width, height, spacing, heightSegm
       const v0 = [xOffset, y, 0];
       const v1 = [xOffset + width, y, 0];
       positions.set([...v0, ...v1], vertexOffset * 3);
-
-      const uvY = j / heightSegments;
-      uvs.set(
-        [uvXOffset, uvY + uvYOffset, uvXOffset + 1, uvY + uvYOffset],
-        uvOffset
-      );
-
+      uvs.set([uvXOffset, j / heightSegments + uvYOffset, uvXOffset + 1, j / heightSegments + uvYOffset], uvOffset);
       if (j < heightSegments) {
         const a = vertexOffset,
           b = vertexOffset + 1,
@@ -170,10 +209,6 @@ function createStackedPlanesBufferGeometry(n, width, height, spacing, heightSegm
   geometry.computeVertexNormals();
   return geometry;
 }
-
-// ==============================
-// 🧩 COMPONENTES INTERNOS
-// ==============================
 
 const MergedPlanes = forwardRef(({ material, width, count, height }, ref) => {
   const mesh = useRef(null);
@@ -200,96 +235,26 @@ const PlaneNoise = forwardRef((props, ref) => (
 ));
 PlaneNoise.displayName = "PlaneNoise";
 
-// ==============================
-// 🚀 COMPONENTE PRINCIPAL
-// ==============================
-
-const Beams = ({
-  beamWidth = 2,
-  beamHeight = 15,
-  beamNumber = 12,
-  lightColor = "#ffffff",
-  speed = 2,
-  noiseIntensity = 1.75,
-  scale = 0.2,
-  rotation = 30,
-}) => {
-  const meshRef = useRef(null);
-
-  const beamMaterial = useMemo(
-    () =>
-      extendMaterial(THREE.MeshStandardMaterial, {
-        header: `
-  varying vec3 vEye;
-  varying float vNoise;
-  varying vec2 vUv;
-  varying vec3 vPosition;
-  uniform float time;
-  uniform float uSpeed;
-  uniform float uNoiseIntensity;
-  uniform float uScale;
-  float cnoise(vec3 P) {
-    // noise function aquí (puedes reutilizar el que ya tienes)
-    return 0.0;
-  }`,
-        vertexHeader: `
-  float getPos(vec3 pos) {
-    vec3 noisePos = vec3(pos.x * 0., pos.y - uv.y, pos.z + time * uSpeed * 3.) * uScale;
-    return cnoise(noisePos);
-  }
-  vec3 getCurrentPos(vec3 pos) {
-    vec3 newpos = pos;
-    newpos.z += getPos(pos);
-    return newpos;
-  }
-  vec3 getNormal(vec3 pos) {
-    vec3 curpos = getCurrentPos(pos);
-    vec3 nextposX = getCurrentPos(pos + vec3(0.01, 0.0, 0.0));
-    vec3 nextposZ = getCurrentPos(pos + vec3(0.0, -0.01, 0.0));
-    vec3 tangentX = normalize(nextposX - curpos);
-    vec3 tangentZ = normalize(nextposZ - curpos);
-    return normalize(cross(tangentZ, tangentX));
-  }`,
-        vertex: {
-          "#include <begin_vertex>": `transformed.z += getPos(transformed.xyz);`,
-          "#include <beginnormal_vertex>": `objectNormal = getNormal(position.xyz);`,
-        },
-        fragment: {
-          "#include <dithering_fragment>": `
-    float randomNoise = sin(gl_FragCoord.x * 12.9898 + gl_FragCoord.y * 78.233) * 43758.5453;
-    gl_FragColor.rgb -= fract(randomNoise) / 15. * uNoiseIntensity;`,
-        },
-        material: { fog: true },
-        uniforms: {
-          diffuse: new THREE.Color(...hexToNormalizedRGB("#000000")),
-          time: { value: 0 },
-          roughness: 0.3,
-          metalness: 0.3,
-          uSpeed: speed,
-          envMapIntensity: 10,
-          uNoiseIntensity: noiseIntensity,
-          uScale: scale,
-        },
-      }),
-    [speed, noiseIntensity, scale]
-  );
-
+const DirLight = ({ position, color }) => {
+  const dir = useRef(null);
+  useEffect(() => {
+    if (!dir.current) return;
+    const cam = dir.current.shadow.camera;
+    if (!cam) return;
+    cam.top = 24;
+    cam.bottom = -24;
+    cam.left = -24;
+    cam.right = 24;
+    cam.far = 64;
+    dir.current.shadow.bias = -0.004;
+  }, []);
   return (
-    <CanvasWrapper>
-      <GroupWithRotation rotationSpeed={rotation}>
-        <PlaneNoise
-          ref={meshRef}
-          material={beamMaterial}
-          count={beamNumber}
-          width={beamWidth}
-          height={beamHeight}
-        />
-        <DirLight color={lightColor} position={[0, 3, 10]} />
-      </GroupWithRotation>
-      <ambientLight intensity={1} />
-      <color attach="background" args={["#000000"]} />
-      <PerspectiveCamera makeDefault position={[0, 0, 20]} fov={30} />
-    </CanvasWrapper>
+    <directionalLight
+      ref={dir}
+      color={color}
+      intensity={1}
+      position={position}
+    />
   );
 };
 

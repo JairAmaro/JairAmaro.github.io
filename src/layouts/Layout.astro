@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css"
+import BeamBackground from "../components/BeamBackground/BeamBackground.jsx"; // ← fondo
 interface Props {
 	title: string;
 }
@@ -27,7 +28,7 @@ import { mainMenu } from '../components/data/menuData.js';
 		<title>{title}</title>
 	</head>
 	<body class="flex flex-col">
-
-			<slot/>
+		<BeamBackground client:only="react" /> <!-- Fondo animado tipo Beams -->
+		<slot/>
 	</body>
 </html>
