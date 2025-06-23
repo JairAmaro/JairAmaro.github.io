@@ -28,56 +28,58 @@ const PhotoCard = ({
 
         {/* Texto animado arriba Oscar J Amaro */}
         <div
-        className="text-zone"
-        style={{
-          position: "absolute",
-          top: "1.5rem",
-          width: "100%",
-          textAlign: "center",
-          zIndex: 10,
-          color: "#ffffff",
-          fontFamily: "'Outfit', sans-serif",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "0.4rem",
-        }}
-      >
-        <div style={{ fontSize: "4rem", fontWeight: 700 }}>Oscar J. Amaro</div>
-        <div
+          className="text-zone"
           style={{
+            position: "absolute",
+            top: "1.5rem",
+            width: "100%",
+            textAlign: "center",
+            zIndex: 10,
+            color: "#ffffff",
+            fontFamily: "'Outfit', sans-serif",
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
-            gap: "0.4ch",
-            fontSize: "2rem",
-            fontWeight: 500,
+            gap: "0.4rem",
           }}
         >
-          <span>Data</span>
-          <span
+          <div style={{ fontSize: "4rem", fontWeight: 700 }}>Oscar J. Amaro</div>
+          <div
             style={{
-              backgroundColor: "rgba(255, 255, 255, 0.15)", // translúcido
-              borderRadius: "8px",
-              padding: "0.1em 0.5em",
-              color: "#fff",
-              backdropFilter: "blur(6px)",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.4ch",
+              fontSize: "2rem",
+              fontWeight: 500,
             }}
           >
-            <RotatingText
-              texts={["Analysis", "Engineering", "Science"]}
-              staggerFrom="last"
-              initial={{ y: "100%", opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: "-120%", opacity: 0 }}
-              staggerDuration={0.025}
-              splitLevelClassName="overflow-hidden pb-0.5"
-              transition={{ type: "spring", damping: 30, stiffness: 400 }}
-              rotationInterval={2000}
-            />
-          </span>
-          <span>| Actuary</span>
+            <span>Data</span>
+            <span
+              style={{
+                backgroundColor: "rgba(255, 255, 255, 0.15)",
+                borderRadius: "8px",
+                padding: "0.1em 0.5em",
+                color: "#fff",
+                backdropFilter: "blur(6px)",
+              }}
+            >
+              <RotatingText
+                texts={["Analysis", "Engineering", "Science"]}
+                staggerFrom="last"
+                initial={{ y: "100%", opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: "-120%", opacity: 0 }}
+                staggerDuration={0.025}
+                splitLevelClassName="overflow-hidden pb-0.5"
+                transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                rotationInterval={2000}
+                elementLevelClassName="text-rotate-element-uniform" // 👈 esto iguala el estilo
+              />
+            </span>
+            <span>| Actuary</span>
+          </div>
         </div>
-      </div>
+
 
         {/* Imagen principal (donde esta patrick)
         Top 16em entre mas garnde mas baja la imagen */}

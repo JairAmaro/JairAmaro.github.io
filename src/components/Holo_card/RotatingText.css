@@ -40,3 +40,10 @@
 .text-rotate-space {
   white-space: pre;
 }
+
+.text-rotate-element-uniform {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 1;
+}
+
