@@ -43,7 +43,10 @@ const PhotoCard = ({
             gap: "0.4rem",
           }}
         >
+          {/* Nombre */}
           <div style={{ fontSize: "4rem", fontWeight: 700 }}>Oscar J. Amaro</div>
+
+          {/* Línea con texto animado */}
           <div
             style={{
               display: "flex",
@@ -61,6 +64,11 @@ const PhotoCard = ({
                 padding: "0.1em 0.5em",
                 color: "#fff",
                 backdropFilter: "blur(6px)",
+                fontSize: "inherit",       // asegura tamaño uniforme
+                fontWeight: "inherit",     // asegura peso uniforme
+                lineHeight: "1",           // mejora alineación vertical
+                display: "flex",           // centra el texto internamente
+                alignItems: "center",      // centra verticalmente
               }}
             >
               <RotatingText
@@ -73,13 +81,12 @@ const PhotoCard = ({
                 splitLevelClassName="overflow-hidden pb-0.5"
                 transition={{ type: "spring", damping: 30, stiffness: 400 }}
                 rotationInterval={2000}
-                elementLevelClassName="text-rotate-element-uniform" // 👈 esto iguala el estilo
+                elementLevelClassName="text-rotate-element-uniform"
               />
             </span>
             <span>| Actuary</span>
           </div>
         </div>
-
 
         {/* Imagen principal (donde esta patrick)
         Top 16em entre mas garnde mas baja la imagen */}
