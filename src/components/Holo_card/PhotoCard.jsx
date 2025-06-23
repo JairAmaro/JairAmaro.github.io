@@ -60,8 +60,8 @@ const PhotoCard = ({
             <span
               style={{
                 backgroundColor: "rgba(255, 255, 255, 0.15)",
-                borderRadius: "8px",
-                padding: "0.1em 0.5em",
+                borderRadius: "12px",      // bordes redondeados
+                padding: "0.25em 0.8em",   // padding ajustado
                 color: "#fff",
                 backdropFilter: "blur(6px)",
                 fontSize: "inherit",       // asegura tamaño uniforme
