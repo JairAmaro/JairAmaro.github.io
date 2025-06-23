@@ -1,9 +1,6 @@
 ---
 import "../styles/global_animate.css";
 import BeamBackground from "../components/BeamBackground/BeamBackground.jsx";
-import Header from "../components/header/Header.astro";
-import { mainMenu } from "../components/data/menuData.js";
-
 interface Props {
   title: string;
 }
@@ -29,7 +26,6 @@ const { title } = Astro.props;
   </head>
   <body class="flex flex-col">
     <BeamBackground client:only="react" />
-    <Header {mainMenu} />
     <slot />
   </body>
 </html>
