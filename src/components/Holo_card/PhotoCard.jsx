@@ -28,38 +28,47 @@ const PhotoCard = ({
 
         {/* Texto animado arriba */}
         <div
-          className="text-zone"
+        className="text-zone"
+        style={{
+          position: "absolute",
+          top: "1.5rem",
+          width: "100%",
+          textAlign: "center",
+          zIndex: 10,
+          color: "#ffffff",
+          fontFamily: "'Outfit', sans-serif",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "0.4rem",
+        }}
+      >
+        <div style={{ fontSize: "2rem", fontWeight: 700 }}>Oscar J. Amaro</div>
+        <div
           style={{
-            position: "absolute",
-            top: "1.2em",
-            width: "100%",
-            textAlign: "center",
-            zIndex: 10,
-            fontSize: "1.4rem",
-            fontWeight: "900",
-            color: "#dcdcdc",
             display: "flex",
-            justifyContent: "center",
+            alignItems: "center",
             gap: "0.4ch",
-            flexWrap: "wrap",
+            fontSize: "1.1rem",
+            fontWeight: 500,
           }}
         >
-          <span style={{ fontWeight: 700 }}>Data</span>
+          <span>Data</span>
           <span
             style={{
-              background: "#6b38fb",
-              color: "white",
+              backgroundColor: "rgba(255, 255, 255, 0.15)", // translúcido
               borderRadius: "8px",
-              padding: "0 0.4em",
-              fontWeight: 800,
+              padding: "0.1em 0.5em",
+              color: "#fff",
+              backdropFilter: "blur(6px)",
             }}
           >
             <RotatingText
               texts={["Analysis", "Engineering", "Science"]}
               staggerFrom="last"
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "-120%" }}
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: "-120%", opacity: 0 }}
               staggerDuration={0.025}
               splitLevelClassName="overflow-hidden pb-0.5"
               transition={{ type: "spring", damping: 30, stiffness: 400 }}
@@ -68,6 +77,9 @@ const PhotoCard = ({
           </span>
           <span>| Actuary</span>
         </div>
+      </div>
+
+
 
         {/* Imagen principal (donde esta patrick)
         Top 16em entre mas garnde mas baja la imagen */}
