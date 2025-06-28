@@ -109,12 +109,29 @@ p {
 	font-size: var(--text-general);
 }
 
-.color__gradiente {
-	background: var(--text-gradient);
+@keyframes moveGradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+	}
+
+	.color__gradiente {
+	background: linear-gradient(270deg, #58f9ff, #df44e7, #58f9ff);
+	background-size: 600% 600%;
+	animation: moveGradient 6s ease infinite;
+
 	-webkit-background-clip: text;
-	background-clip: text;
 	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	color: transparent;
 }
+
 
 .max__width {
 	max-width: 117.8rem;
