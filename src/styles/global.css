@@ -77,7 +77,10 @@
 	);
 }
 
-/* ✅ Ajustes globales para fondo animado */
+* {
+	box-sizing: border-box;
+}
+
 html,
 body {
 	width: 100%;
@@ -90,10 +93,6 @@ body {
 	background: transparent !important;
 	overflow-x: hidden;
 	position: relative;
-}
-
-* {
-	box-sizing: border-box;
 }
 
 main {
@@ -116,4 +115,23 @@ p {
 
 .max__width {
 	max-width: 117.8rem;
+}
+
+/* 🎨 SCROLLBAR PERSONALIZADA */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background: #000; /* fondo negro */
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #333; /* color del scroll */
+	border-radius: 6px;
+	border: 2px solid #000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: #555;
 }
