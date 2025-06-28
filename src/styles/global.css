@@ -89,7 +89,7 @@ html {
 
 body {
 	width: 100%;
-	background: var(--site-bg) no-repeat; /* ✅ solo una vez */
+	background: transparent !important;
 }
 
 main {
