@@ -118,7 +118,7 @@ const Beams = ({
   float getPos(vec3 pos) {
     vec3 noisePos =
       vec3(pos.x * 0., pos.y - uv.y, pos.z + time * uSpeed * 3.) * uScale;
-    return cnoise(noisePos);
+    return noise(noisePos.xy);
   }
   vec3 getCurrentPos(vec3 pos) {
     vec3 newpos = pos;
