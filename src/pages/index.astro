@@ -9,7 +9,11 @@ import Skills from '../components/skills/Skills.astro';
 import Layout from '../layouts/Layout.astro';
 import OrbitSkills from '../components/OrbitSkills.astro';
 import PCHoloCard from '../components/Holo_card/PCHoloCard.astro';
+import BeamBackground from '../components/BeamBackground/BeamBackground.jsx';
 ---
+
+<!-- Fondo animado cargado como cliente -->
+<BeamBackground client:only="react" />
 
 <Layout title="Oscar Amaro | Actuary | Data Analyst | Data Engineering | Data Scientist">
 	<Header origin={mainMenu} />
