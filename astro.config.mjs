@@ -8,8 +8,7 @@ export default defineConfig({
   devToolbar: {
     enabled: false
   },
-  site: 'https://JairAmaro.github.io',  // Especifica tu URL de GitHub Pages para hacer el deploy esto entendi de la documentacion
+  site: 'https://JairAmaro.github.io', // bien
+  base: '/', // ✅ necesario para que funcione en producción
   integrations: [react(), tailwind(), sitemap()]
 });
-
-// dummie commit

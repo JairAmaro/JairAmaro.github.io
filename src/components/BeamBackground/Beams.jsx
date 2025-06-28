@@ -73,10 +73,21 @@ const hexToNormalizedRGB = (hex) => {
 };
 
 const noise = `
-// todo el bloque noise copiado tal cual desde reactbits (lo tienes bien)
-float random (in vec2 st) {...}
-...
-return 2.2 * n_xyz;
+float random (in vec2 st) {
+  return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
+float noise (in vec2 st) {
+  vec2 i = floor(st);
+  vec2 f = fract(st);
+  float a = random(i);
+  float b = random(i + vec2(1.0, 0.0));
+  float c = random(i + vec2(0.0, 1.0));
+  float d = random(i + vec2(1.0, 1.0));
+  vec2 u = f * f * (3.0 - 2.0 * f);
+  return mix(a, b, u.x) +
+         (c - a)* u.y * (1.0 - u.x) +
+         (d - b) * u.x * u.y;
+}
 `;
 
 const Beams = ({
@@ -107,7 +118,7 @@ const Beams = ({
   float getPos(vec3 pos) {
     vec3 noisePos =
       vec3(pos.x * 0., pos.y - uv.y, pos.z + time * uSpeed * 3.) * uScale;
-    return cnoise(noisePos);
+    return noise(noisePos.xy);
   }
   vec3 getCurrentPos(vec3 pos) {
     vec3 newpos = pos;
@@ -122,6 +133,7 @@ const Beams = ({
     vec3 tangentZ = normalize(nextposZ - curpos);
     return normalize(cross(tangentZ, tangentX));
   }`,
+        fragmentHeader: "",
         vertex: {
           "#include <begin_vertex>": `transformed.z += getPos(transformed.xyz);`,
           "#include <beginnormal_vertex>": `objectNormal = getNormal(position.xyz);`,
@@ -189,7 +201,10 @@ function createStackedPlanesBufferGeometry(n, width, height, spacing, heightSegm
       const v0 = [xOffset, y, 0];
       const v1 = [xOffset + width, y, 0];
       positions.set([...v0, ...v1], vertexOffset * 3);
-      uvs.set([uvXOffset, j / heightSegments + uvYOffset, uvXOffset + 1, j / heightSegments + uvYOffset], uvOffset);
+      uvs.set(
+        [uvXOffset, j / heightSegments + uvYOffset, uvXOffset + 1, j / heightSegments + uvYOffset],
+        uvOffset
+      );
       if (j < heightSegments) {
         const a = vertexOffset,
           b = vertexOffset + 1,
