@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import BeamBackground from "../components/BeamBackground/BeamBackground.jsx";
+import SilkBackground from "../components/BeamBackground/SilkBackground.jsx";
 
 interface Props {
   title: string;
@@ -28,12 +28,11 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
 
-  <body class="flex flex-col">
-    <!-- Fondo animado global -->
-    <BeamBackground client:only="react" />
+  <body class="flex flex-col min-h-screen bg-transparent">
+    <!-- Fondo animado global con SILK -->
+    <SilkBackground client:only="react" />
 
     <!-- Contenido de la página -->
     <slot />
   </body>
 </html>
-
