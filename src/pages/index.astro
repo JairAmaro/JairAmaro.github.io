@@ -9,7 +9,8 @@ import Skills from '../components/skills/Skills.astro';
 import Layout from '../layouts/Layout.astro';
 import OrbitSkills from '../components/OrbitSkills.astro';
 import PCHoloCard from '../components/Holo_card/PCHoloCard.astro';
-import BeamBackground from '../components/BeamBackground/BeamBackground.jsx';
+import BeamsSection from '../components/BeamBackground/BeamsSection.astro';
+
 ---
 
 <Layout title="Oscar Amaro | Actuary | Data Analyst | Data Engineering | Data Scientist">
@@ -19,11 +20,7 @@ import BeamBackground from '../components/BeamBackground/BeamBackground.jsx';
 		<section class="my-12 flex justify-center">
 			<PCHoloCard />
 		</section>
-
-		<section class="relative w-full h-[400px] my-8 border-2 border-dashed border-green-500">
-			<BeamBackground client:only="react" />
-		</section>
-
+		<BeamsSection />
 		<About />
 		<Skills />
 		<OrbitSkills />
