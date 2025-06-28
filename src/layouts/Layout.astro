@@ -2,14 +2,13 @@
 import "../styles/global.css";
 import BeamBackground from "../components/BeamBackground/BeamBackground.jsx";
 import Header from '../components/header/Header.astro';
-import { mainMenu as fallbackMenu } from '../components/data/menuData.js';
 
 interface Props {
   title: string;
-  mainMenu?: typeof fallbackMenu;
+  mainMenu?: any;
 }
 
-const { title, mainMenu = fallbackMenu } = Astro.props;
+const { title, mainMenu } = Astro.props;
 ---
 
 <!doctype html>
@@ -36,7 +35,7 @@ const { title, mainMenu = fallbackMenu } = Astro.props;
     <BeamBackground client:only="react" />
 
     <!-- Menú principal -->
-    <Header {mainMenu} />
+    {mainMenu && <Header {mainMenu} />}
 
     <!-- Contenido de la página -->
     <slot />
