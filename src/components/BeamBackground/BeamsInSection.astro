@@ -2,18 +2,20 @@
 import Beams from './Beams.jsx';
 ---
 
-<!-- Sección visual con Beams como componente animado -->
-<section class="relative w-full h-[300px] border-2 border-dashed border-green-500 overflow-hidden">
-  <div class="absolute inset-0 z-0">
-    <Beams
-      beamWidth={3}
-      beamHeight={30}
-      beamNumber={20}
-      lightColor="#8000ff"
-      speed={2}
-      noiseIntensity={1.75}
-      scale={0.2}
-      rotation={30}
-    />
+<!-- Sección de prueba con Beams como componente embebido -->
+<section class="w-full my-8">
+  <div class="relative w-full h-[300px] border-2 border-dashed border-green-500 overflow-hidden">
+    <div class="w-full h-full">
+      <Beams
+        beamWidth={3}
+        beamHeight={30}
+        beamNumber={20}
+        lightColor="#8000ff"
+        speed={2}
+        noiseIntensity={1.75}
+        scale={0.2}
+        rotation={30}
+      />
+    </div>
   </div>
 </section>
