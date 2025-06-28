@@ -2,12 +2,15 @@
 import "../styles/global.css";
 import BeamBackground from "../components/BeamBackground/BeamBackground.jsx";
 import Header from '../components/header/Header.astro';
-import { mainMenu } from '../components/data/menuData.js';
+import { mainMenu as defaultMenu } from '../components/data/menuData.js';
 
 interface Props {
   title: string;
+  mainMenu?: typeof defaultMenu;
 }
-const { title } = Astro.props;
+
+// Obtener título y menú (si no se pasa, usar el por defecto)
+const { title, mainMenu = defaultMenu } = Astro.props;
 ---
 
 <!doctype html>
@@ -28,14 +31,15 @@ const { title } = Astro.props;
     <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
     <title>{title}</title>
   </head>
-  <body class="flex flex-col">
 
-    <!-- Fondo animado -->
+  <body class="flex flex-col">
+    <!-- Fondo animado global -->
     <BeamBackground client:only="react" />
 
-    <!-- Header y contenido -->
+    <!-- Menú principal -->
     <Header {mainMenu} />
-    <slot />
 
+    <!-- Contenido de la página -->
+    <slot />
   </body>
 </html>
