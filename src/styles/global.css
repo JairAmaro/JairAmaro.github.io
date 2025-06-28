@@ -31,9 +31,9 @@
 
 	/* 🧱 SUPERFICIES */
 	--surface: #4F4360;
-	--surface-variant: #e0d8e7;
+	--surface-variant: #0a0112;
 	--surface-dim: #998da9;
-	--surface-bridge: #d6cdee;
+	--surface-bridge: #060114;
 
 	/* 🔗 VARIABLES PRINCIPALES Y SECUNDARIAS */
 	--primary: var(--primary-60);
@@ -61,19 +61,12 @@
 	/* 🌌 FONDO GENERAL DEL SITIO */
 	--site-bg: var(--primary-0);
 
-	/* 🎇 FONDO DEL HERO CON GRADIENTE */
-	--hero-bg: linear-gradient(
-		-54deg,
-		var(--primary-0) -23%,
-		var(--primary-20),
-		var(--primary-0) 51%
-	);
 
 	/* 🌈 GRADIENTE PARA TITULOS */
 	--text-gradient: radial-gradient(
 		circle farthest-corner at center center,
-		#58f9ff 0%,
-		#df44e7 100%
+		#6788e3 0%,
+		#5e59f0 100%
 	);
 }
 
@@ -87,17 +80,17 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	font-family: var(--font-montserrat);
+	font-family: var(--font-montserrat) !important;
 	font-size: 62.5%; /* 1rem = 10px */
 	scroll-behavior: smooth;
 	background: transparent !important;
-	overflow-x: hidden;
+	overflow-x: hidden; /* 🛡️ evita scroll lateral */
 	position: relative;
 }
 
 main {
-	width: 100%;
 	align-self: center;
+	width: 100%;
 	min-height: 100vh;
 }
 
@@ -117,7 +110,7 @@ p {
 	max-width: 117.8rem;
 }
 
-/* 🎨 SCROLLBAR PERSONALIZADA */
+/* 🎨 SCROLLBAR OSCURA */
 ::-webkit-scrollbar {
 	width: 10px;
 }
@@ -127,7 +120,7 @@ p {
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: #333; /* color del scroll */
+	background-color: #333;
 	border-radius: 6px;
 	border: 2px solid #000;
 }
