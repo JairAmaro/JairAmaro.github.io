@@ -14,6 +14,7 @@
 	--primary-99: #f4f4fe;
 	--primary-100: #ffffff;
 
+	
 	/* 🎨 PALETA SECUNDARIA - tonos rosados */
 	--secondary-0: #1c050e;
 	--secondary-10: #490e25;
@@ -30,7 +31,7 @@
 	--secondary-100: #ffffff;
 
 	/* 🧱 SUPERFICIES */
-	--surface: #4F4360;
+	--surface: #4f4360;
 	--surface-variant: #e0d8e7;
 	--surface-dim: #998da9;
 	--surface-bridge: #644ea1;
@@ -81,26 +82,19 @@
 	box-sizing: border-box;
 }
 
-html {
-	font-family: var(--font-montserrat) !important;
-	font-size: 62.5%; /* 1rem = 10px */
-	scroll-behavior: smooth;
-}
-
+html,
 body {
+	margin: 0;
+	padding: 0;
 	width: 100%;
-	background: transparent !important;
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-	color: var(--primary-100);
-	scrollbar-width: thin;
-	scrollbar-color: black transparent;
+	height: 100%;
+	font-family: var(--font-montserrat);
+	scroll-behavior: smooth;
+	background-color: #000 !important;
+	overflow-x: hidden;
 }
 
 main {
-	flex: 1;
-	width: 100%;
 	align-self: center;
 }
 
@@ -120,14 +114,25 @@ p {
 	max-width: 117.8rem;
 }
 
-/* 🎯 Scrollbar personalizada en Webkit (Chrome, Safari) */
+/* 🎯 Fondo animado beams fijo en background */
+.beams-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: -1;
+	pointer-events: none;
+}
+
+/* 🖤 Scrollbar negro (visible en navegadores que lo soportan) */
 ::-webkit-scrollbar {
 	width: 8px;
 }
 ::-webkit-scrollbar-track {
-	background: transparent;
+	background: #000;
 }
 ::-webkit-scrollbar-thumb {
-	background-color: black;
-	border-radius: 8px;
+	background-color: #333;
+	border-radius: 4px;
 }
