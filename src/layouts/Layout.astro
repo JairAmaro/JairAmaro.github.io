@@ -1,14 +1,12 @@
 ---
 import "../styles/global.css";
 import BeamBackground from "../components/BeamBackground/BeamBackground.jsx";
-import Header from '../components/header/Header.astro';
 
 interface Props {
   title: string;
-  mainMenu?: any;
 }
 
-const { title, mainMenu } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <!doctype html>
@@ -34,10 +32,8 @@ const { title, mainMenu } = Astro.props;
     <!-- Fondo animado global -->
     <BeamBackground client:only="react" />
 
-    <!-- Menú principal -->
-    {mainMenu && <Header {mainMenu} />}
-
     <!-- Contenido de la página -->
     <slot />
   </body>
 </html>
+
