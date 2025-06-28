@@ -2,15 +2,14 @@
 import "../styles/global.css";
 import BeamBackground from "../components/BeamBackground/BeamBackground.jsx";
 import Header from '../components/header/Header.astro';
-import { mainMenu as defaultMenu } from '../components/data/menuData.js';
+import { mainMenu as fallbackMenu } from '../components/data/menuData.js';
 
 interface Props {
   title: string;
-  mainMenu?: typeof defaultMenu;
+  mainMenu?: typeof fallbackMenu;
 }
 
-// Obtener título y menú (si no se pasa, usar el por defecto)
-const { title, mainMenu = defaultMenu } = Astro.props;
+const { title, mainMenu = fallbackMenu } = Astro.props;
 ---
 
 <!doctype html>
