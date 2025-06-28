@@ -133,7 +133,6 @@ const Beams = ({
     vec3 tangentZ = normalize(nextposZ - curpos);
     return normalize(cross(tangentZ, tangentX));
   }`,
-        fragmentHeader: "",
         vertex: {
           "#include <begin_vertex>": `transformed.z += getPos(transformed.xyz);`,
           "#include <beginnormal_vertex>": `objectNormal = getNormal(position.xyz);`,
@@ -232,9 +231,14 @@ const MergedPlanes = forwardRef(({ material, width, count, height }, ref) => {
     () => createStackedPlanesBufferGeometry(count, width, height, 0, 100),
     [count, width, height]
   );
+
+  // ✅ Este es el fix importante
   useFrame((_, delta) => {
-    mesh.current.material.uniforms.time.value += 0.1 * delta;
+    if (mesh.current?.material?.uniforms?.time) {
+      mesh.current.material.uniforms.time.value += 0.1 * delta;
+    }
   });
+
   return <mesh ref={mesh} geometry={geometry} material={material} />;
 });
 MergedPlanes.displayName = "MergedPlanes";
