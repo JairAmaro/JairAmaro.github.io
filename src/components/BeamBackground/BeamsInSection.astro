@@ -1,0 +1,19 @@
+---
+import Beams from './Beams.jsx';
+---
+
+<!-- Sección que renderiza los Beams como contenido visual interno -->
+<section class="relative w-full h-[300px] border-2 border-dashed border-lime-500 overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <Beams
+      beamWidth={3}
+      beamHeight={30}
+      beamNumber={20}
+      lightColor="#8000ff"
+      speed={2}
+      noiseIntensity={1.75}
+      scale={0.2}
+      rotation={30}
+    />
+  </div>
+</section>
