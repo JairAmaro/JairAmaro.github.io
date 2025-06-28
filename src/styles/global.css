@@ -122,15 +122,23 @@ p {
 	}
 
 	.color__gradiente {
-	background: linear-gradient(270deg, #58f9ff, #df44e7, #58f9ff);
+	background: linear-gradient(
+		270deg,
+		#40ffaa,
+		#0549e5,
+		#40ffaa,
+		#0549e5,
+		#40ffaa
+	);
 	background-size: 600% 600%;
-	animation: moveGradient 6s ease infinite;
+	animation: moveGradient 8s ease infinite;
 
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
 	color: transparent;
 }
+
 
 
 .max__width {
