@@ -17,10 +17,10 @@ export default function BeamBackground() {
     >
       <Beams
         beamWidth={3}
-        beamHeight={30}
-        beamNumber={20}
-        lightColor="#8000ff"
-        speed={20}
+        beamHeight={35}
+        beamNumber={5}
+        lightColor="#5a52f2"
+        speed={2}
         noiseIntensity={1.75}
         scale={0.2}
         rotation={30}

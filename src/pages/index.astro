@@ -9,21 +9,25 @@ import Skills from '../components/skills/Skills.astro';
 import Layout from '../layouts/Layout.astro';
 import PCHoloCard from '../components/Holo_card/PCHoloCard.astro';
 ---
-
 <Layout title="Oscar Amaro | Actuary | Data Analyst | Data Engineering | Data Scientist">
-	<Header origin={mainMenu} />
-	<main class="self-center w-full">
-		<!-- 🌟 Tarjeta Holográfica -->
-		<section class="my-12 flex justify-center">
-			<PCHoloCard />
-		</section>
-		<About />
-		<Skills />
-		<Portfolio />
-		<BlogHome />
-	</main>
-	<Footer />
+  <Header origin={mainMenu} />
+  <main class="self-center w-full">
+    <!-- 🌟 Tarjeta Holográfica -->
+    <section class="my-12 flex justify-center">
+      <PCHoloCard />
+    </section>
+
+    <!-- 💡 Sobre mí -->
+    <About />
+
+    <!-- 🛠️ Habilidades -->
+    <Skills />
+
+    <!-- 📁 Portafolio -->
+    <Portfolio />
+
+    <!-- 📝 Blog -->
+    <BlogHome />
+  </main>
+  <Footer />
 </Layout>
-
-
-
