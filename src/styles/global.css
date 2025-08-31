@@ -89,7 +89,7 @@ html {
 
 body {
 	width: 100%;
-	background: transparent !important;
+	background: black !important; /* 👈 Cambio aquí */
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
