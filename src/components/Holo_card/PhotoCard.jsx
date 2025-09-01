@@ -20,7 +20,7 @@ const PhotoCard = ({
           <Silk
             speed={5}
             scale={1}
-            color="#7B7481"
+            color="#3f43cbff"
             noiseIntensity={1.5}
             rotation={0}
           />
