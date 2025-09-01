@@ -247,6 +247,41 @@ canvas {
   display: block;
 }
 
+
+@keyframes moveGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.color__gradiente {
+  background: linear-gradient(270deg, #ffc107, #ff9800, #ff5722, #ffc107);
+  background-size: 600% 600%;
+  animation: moveGradient 8s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.rotating-badge {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
+  border-radius: 9999px;
+  padding: 0.2em 0.7em;
+  display: inline-block;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: inherit;
+  line-height: 1.1;
+}
+
 @keyframes glow-bg {
   0% {
     --bgrotate: 0deg;

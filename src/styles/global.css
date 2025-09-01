@@ -119,20 +119,24 @@ p {
 	100% {
 		background-position: 0% 50%;
 	}
-	}
+}
 
-	.color__gradiente {
-	background: linear-gradient(
-		270deg,
-		#40ffaa,
-		#0549e5,
-		#40ffaa,
-		#0549e5,
-		#40ffaa
-	);
+/* Gradiente principal azul-verde */
+.color__gradiente {
+	background: linear-gradient(270deg, #40ffaa, #0549e5, #40ffaa);
 	background-size: 600% 600%;
 	animation: moveGradient 8s ease infinite;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	color: transparent;
+}
 
+/* Variante cálida naranja-amarillo */
+.color__gradiente--warm {
+	background: linear-gradient(270deg, #ffc107, #ff9800, #ff5722, #ffc107);
+	background-size: 600% 600%;
+	animation: moveGradient 8s ease infinite;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
