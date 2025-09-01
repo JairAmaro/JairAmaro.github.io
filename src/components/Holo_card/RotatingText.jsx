@@ -200,7 +200,7 @@ const RotatingText = forwardRef((props, ref) => {
                         )
                       ),
                     }}
-                    className={cn("text-rotate-element", elementLevelClassName)}
+                    className={cn("text-rotate-element", elementLevelClassName, "color__gradiente--warm")}
                   >
                     {char}
                   </motion.span>

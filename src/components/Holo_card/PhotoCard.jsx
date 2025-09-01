@@ -43,31 +43,33 @@ const PhotoCard = ({
             gap: "0.4rem",
           }}
         >
-          <div style={{ fontSize: "4rem", fontWeight: 700 }}>Oscar J. Amaro</div>
+          <div
+            className="color__gradiente"
+            style={{
+              fontSize: "4rem",
+              fontWeight: 700,
+              fontFamily: "'Outfit', sans-serif",
+            }}
+          >
+            {name}
+          </div>
+
           <div
             style={{
               display: "flex",
               alignItems: "center",
               gap: "0.4ch",
-              fontSize: "2rem", // <- Esto controla el tamaño general
+              fontSize: "2rem",
               fontWeight: 600,
             }}
           >
             <span>Data</span>
             <span
-              style={{
-                backgroundColor: "rgba(255, 255, 255, 0.15)",
-                padding: "0.2em 0.7em", // ✅ Ajuste del cuadro translúcido
-                color: "#fff",
-                backdropFilter: "blur(6px)",
-                fontFamily: "'Outfit', sans-serif",
-                fontWeight: 600,
-                fontSize: "inherit",
-                lineHeight: 1.1,
-              }}
+              className="rotating-badge"
             >
               <RotatingText
                 texts={["Analysis", "Engineering", "Science"]}
+                mainClassName="color__gradiente--warm"
                 staggerFrom="last"
                 initial={{ y: "100%", opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -82,8 +84,7 @@ const PhotoCard = ({
           </div>
         </div>
 
-        {/* Imagen principal (donde esta patrick)
-        Top 16em entre mas garnde mas baja la imagen */}
+        {/* Imagen principal */}
         <div
           className="pc-avatar-zone"
           style={{
@@ -103,7 +104,7 @@ const PhotoCard = ({
             alt={`${name} avatar`}
             loading="lazy"
             style={{
-              maxHeight: "85%", // tamaño de la imagen 
+              maxHeight: "85%",
               width: "auto",
               objectFit: "contain",
             }}
