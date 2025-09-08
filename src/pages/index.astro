@@ -15,13 +15,16 @@ import LogoLoop from '../components/Skills_loop/LogoLoop.astro';
   <Header origin={mainMenu} />
 
   <main class="self-center w-full mt-32">
-    
-    <!-- 🌟 Tarjeta Holográfica -->
-    <section class="my-12 flex justify-center">
-      <PCHoloCard />
+
+    <!-- 🚀 Logo animado de habilidades (Inicio) -->
+    <section class="z-10 relative pt-20">
+      <LogoLoop />
     </section>
 
-    <LogoLoop />
+    <!-- 🌟 Tarjeta Holográfica -->
+    <section class="my-12 flex justify-center z-0 relative">
+      <PCHoloCard />
+    </section>
 
     <!-- 💡 Sobre mí -->
     <About />
