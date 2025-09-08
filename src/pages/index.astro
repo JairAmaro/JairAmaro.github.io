@@ -12,17 +12,18 @@ import LogoLoop from '../components/Skills_loop/LogoLoop.astro';
 ---
 
 <Layout title="Oscar Amaro | Actuary | Data Analyst | Data Engineering | Data Scientist">
+  <!-- 🧭 Header con z-index alto -->
   <Header origin={mainMenu} />
 
-  <main class="self-center w-full mt-32">
-
+  <main class="self-center w-full mt-0">
+    
     <!-- 🚀 Logo animado de habilidades (Inicio) -->
-    <section class="z-10 relative pt-20">
+    <section class="relative z-0 mt-40">
       <LogoLoop />
     </section>
 
     <!-- 🌟 Tarjeta Holográfica -->
-    <section class="my-12 flex justify-center z-0 relative">
+    <section class="mt-20 mb-12 flex justify-center relative z-0">
       <PCHoloCard />
     </section>
 
