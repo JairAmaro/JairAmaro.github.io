@@ -1,23 +1,29 @@
-#skills {
+/* Contenedor general del texto */
+.skills__container {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 0 rem;
+	text-align: justify;
 	display: flex;
 	flex-direction: column;
-	max-width: calc(var(--max-width) + 2.2rem);
-	padding: 1.1rem;
-	gap: 2.2rem;
-	margin: 4rem auto;
+	gap: 1 rem;
 }
 
+/* Subtítulos tipo "Data Analyst", "Ciencia de Datos", etc. */
 .subtitle {
-	font-size: 1.8rem; /* o 1.1rem si lo quieres un poquito más grande */
+	font-size: 1.8rem;
 	font-weight: 600;
 	margin-top: 1.5rem;
 }
 
+/* Comportamiento en pantallas pequeñas */
 @media screen and (max-width: 768px) {
 	#skills {
 		flex-direction: column-reverse;
 	}
-	#skills .text-content {
+
+	.skills__container {
 		max-width: 100%;
+		padding: 0 1rem;
 	}
 }
