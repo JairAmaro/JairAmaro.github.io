@@ -1,21 +1,46 @@
 ---
 import terminal from './terminal.module.css';
-const { nombre } = Astro.props;
+
+// Props que recibe el componente
+const {
+  nombre,
+  hasSoftwares = false,
+  hasFrameworks = false
+} = Astro.props;
 ---
 
 <div class={terminal.terminal}>
-	<div class={terminal.header}>
-		<div class={terminal.close}>✕</div>
-		<div class={terminal.minimize}>—</div>
-		<div class={terminal.maximize}>⇿</div>
-	</div>
-	<div class={terminal.body}>
-		<div class={terminal.user__line}>
-			<span class={terminal.user__name}>{nombre}@root: </span>
-			<span class={terminal.separator}>~</span>$ . printskills
-		</div>
-		<div class="content">
-			<slot />
-		</div>
-	</div>
+  <div class={terminal.header}>
+    <div class={terminal.close}>✕</div>
+    <div class={terminal.minimize}>—</div>
+    <div class={terminal.maximize}>⇿</div>
+  </div>
+
+  <div class={terminal.body}>
+
+    {hasSoftwares && (
+      <>
+        <div class={terminal.user__line}>
+          <span class={terminal.user__name}>{nombre}@root:</span>
+          <span class={terminal.separator}> ~</span>$ . softwares
+        </div>
+        <div class="content">
+          <slot name="softwares" />
+        </div>
+      </>
+    )}
+
+    {hasFrameworks && (
+      <>
+        <div class={terminal.user__line}>
+          <span class={terminal.user__name}>{nombre}@root:</span>
+          <span class={terminal.separator}> ~</span>$ . frameworks
+        </div>
+        <div class="content">
+          <slot name="frameworks" />
+        </div>
+      </>
+    )}
+
+  </div>
 </div>
