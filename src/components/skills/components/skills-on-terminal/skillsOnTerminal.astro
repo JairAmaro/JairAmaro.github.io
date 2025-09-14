@@ -1,26 +1,116 @@
 ---
-import TerminalIcon from '../../atoms/terminal-icon/TerminalIcon.astro';
 import Terminal from '../terminal/Terminal.astro';
 import './skills-on-terminal.css';
 ---
 
-<Terminal nombre="Oscar_Amaro">
-	<div class="terminal__skills">
-		<h2>Mis habilidades</h2>
-		<div class="terminal__skills__container">
-			<TerminalIcon src="/assets/Python.png" name="Python" textColor="white" />
-			<TerminalIcon src="/assets/vscode.svg" name="VSC" textColor="white" />
-			<TerminalIcon src="/assets/git.svg" name="Git" textColor="white" />
-			<TerminalIcon src="/assets/jupyter.svg" name="Jupyter" textColor="white" />
-			<TerminalIcon src="/assets/googlecloud.svg" name="Google Cloud" textColor="white" />
-			<TerminalIcon src="/assets/apacheairflow.svg" name="Airflow" textColor="white" />
-			<TerminalIcon src="/assets/apachespark.svg" name="Spark" textColor="white" />
-			<TerminalIcon src="/assets/tensorflow.svg" name="Tensorflow" textColor="white" />
-			<TerminalIcon src="/assets/numpy.svg" name="Numpy" textColor="white" />
-			<TerminalIcon src="/assets/pandas.svg" name="Pandas" textColor="white" />
-			<TerminalIcon src="/assets/scikitlearn.svg" name="Scikitlearn" textColor="white" />
-		</div>
-	</div>
+<Terminal nombre="Oscar_Amaro" hasSoftwares={true} hasFrameworks={true}>
+
+  <!-- SLOT: SOFTWARES -->
+  <div slot="softwares" class="terminal__skills__container">
+    <!-- -->
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
+      alt="Python"
+      width="50"
+      height="50"
+    />
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jupyter/jupyter-original-wordmark.svg"
+      alt="Jupyter"
+      width="50"
+      height="50"
+    />
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuresqldatabase/azuresqldatabase-original.svg"
+      alt="SQL"
+      width="50"
+      height="50"
+    />
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original-wordmark.svg"
+      alt="Docker"
+      width="50"
+      height="50"
+    />
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rancher/rancher-plain-wordmark.svg"
+      alt="Rancher"
+      width="50"
+      height="50"
+    />
+    <img
+      src="https://raw.githubusercontent.com/microsoft/PowerBI-Icons/main/PNG/Power-BI.png"
+      alt="Power BI"
+      width="20"
+      height="20"
+    />
+    <img
+      src="https://raw.githubusercontent.com/microsoft/PowerBI-Icons/main/PNG/Power-Automate-Colored.png"
+      alt="Power Automate"
+      width="30"
+      height="30"
+    />
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original-wordmark.svg"
+      alt="Git"
+      width="50"
+      height="50"
+    />
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original-wordmark.svg"
+      alt="GitHub"
+      width="50"
+      height="50"
+    />
+  <!-- -->
+  </div>
+
+  <!-- SLOT: FRAMEWORKS -->
+  <div slot="frameworks" class="terminal__skills__container">
+    <!-- -->
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original-wordmark.svg"
+      alt="Pandas"
+      width="50"
+      height="50"
+    />
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/scikitlearn/scikitlearn-original.svg"
+      alt="Scikit Learn"
+      width="50"
+      height="50"
+    />
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg"
+      alt="Numpy"
+      width="50"
+      height="50"
+    />
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original-wordmark.svg"
+      alt="Matplotlib"
+      width="80"
+      height="80"
+    />
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apacheairflow/apacheairflow-original-wordmark.svg"
+      alt="Airflow"
+      width="80"
+      height="80"
+    />
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original-wordmark.svg"
+      alt="Fastapi"
+      width="80"
+      height="80"
+    />
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tensorflow/tensorflow-original-wordmark.svg"
+      alt="Tensorflow"
+      width="80"
+      height="80"
+    />
+  <!-- -->
+  </div>
+
 </Terminal>
-
-

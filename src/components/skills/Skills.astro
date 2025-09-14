@@ -1,46 +1,37 @@
 ---
-import Title from '../atoms/Title.astro';
-import SkillsOnTerminal from './components/skills-on-terminal/skillsOnTerminal.astro';
 import './skills.css';
+import SkillsOnTerminal from './components/skills-on-terminal/skillsOnTerminal.astro';
 ---
 
 <section id="skills">
-	<SkillsOnTerminal />
-	<div class="text-content">
-		<Title contenido="Habilidades" />
-		<p>
-			Cuento con experiencia en análisis de datos, ingeniería de datos y ciencia de datos. 
-			A lo largo de mi carrera, he trabajado con diversas herramientas y tecnologías que me han permitido extraer, transformar, analizar y visualizar información de manera eficiente
-		</p>
+	<div class="skills__container">
+		<SkillsOnTerminal />
 
-		<p>
-			<strong>Data Analyst:</strong> Manejo Python con librerías como pandas, numpy y seaborn para el análisis de datos. 
-											También utilizo SQL y BigQuery para la manipulación de bases de datos, 
-											así como herramientas de visualización como Power BI y Looker
-		</p>
+		<div class="text-content">
+			<h3 class="subtitle color__gradiente">Habilidades</h3>
+			<p>
+				Cuento con experiencia en análisis de datos, ingeniería de datos y ciencia de datos. 
+				A lo largo de mi carrera, he trabajado con diversas herramientas y tecnologías que me han permitido extraer, transformar, analizar y visualizar información de manera eficiente.
+			</p>
 
-		<p>
-			<strong>Data Engineer:</strong> Experiencia en orquestación de datos con Airflow, almacenamiento en la nube con BigQuery y Buckets de Google Cloud. 
-											Además, desarrollo y optimizo pipelines ETL/ELT y despliego modelos en Vertex AI
-		</p>
+			<h3 class="subtitle color__gradiente">Data Analyst</h3>
+			<p>
+				Manejo Python con librerías como pandas, numpy y seaborn para el análisis de datos. 
+				También utilizo SQL y BigQuery para la manipulación de bases de datos, 
+				así como herramientas de visualización como Power BI y Looker.
+			</p>
 
-		<p>
-			<strong>Ciencia de Datos:</strong> Implemento modelos de Machine Learning con scikit-learn, TensorFlow y XGBoost, enfocados en modelado predictivo, 
-												optimización de hiperparámetros y evaluación de modelos
-		</p>
+			<h3 class="subtitle color__gradiente">Data Engineer</h3>
+			<p>
+				Experiencia en orquestación de datos con Airflow, almacenamiento en la nube con BigQuery y Buckets de Google Cloud. 
+				Además, desarrollo y optimizo pipelines ETL/ELT y despliego modelos en Vertex AI.
+			</p>
 
-		<p>
-			<strong>Herramientas:</strong> Uso de Git y GitHub para control de versiones, Selenium para automatización de tareas
-											como técnicas avanzadas de manipulación de datos con regex
-			
-		</p>
-
-		<p>
-			<strong>Habilidades Blandas:</strong> Me destaco por mi comunicación efectiva, razonamiento analítico, resolución de problemas y trabajo en equipo.
-		</p>
-
-		<p>
-			<strong>Idiomas:</strong> Tengo un nivel de inglés B1-B2, lo que me permite leer documentación técnica y comunicarme en entornos profesionales
-		</p>
+			<h3 class="subtitle color__gradiente">Ciencia de Datos</h3>
+			<p>
+				Implemento modelos de Machine Learning con scikit-learn, TensorFlow y XGBoost, enfocados en modelado predictivo, 
+				optimización de hiperparámetros y evaluación de modelos.
+			</p>
+		</div>
 	</div>
 </section>

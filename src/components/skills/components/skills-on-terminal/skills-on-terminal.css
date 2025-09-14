@@ -1,39 +1,31 @@
 .terminal__skills {
-	width: 100%;
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 2rem 1.1rem;
 	display: flex;
-	justify-content: center;
-	align-items: center;
 	flex-direction: column;
-	padding: 2.2rem 0;
-}
-
-.terminal__skills h2 {
-	font-size: var(--text-xx-large);
-	font-weight: 600;
-	color: var(--secondary-90);
-	margin-bottom: 2rem;
+	align-items: center;
 }
 
 .terminal__skills__container {
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
+	flex-wrap: wrap;               /* ✅ Permite salto si no caben */
+	justify-content: center;       /* Centrado horizontal */
+	align-items: center;
 	gap: 2rem;
 	width: 100%;
-	max-width: 960px;
+	max-width: 800px;              /* ✅ Igual a .terminal__skills para consistencia */
+	box-sizing: border-box;
 }
 
+/* Tarjeta individual del ícono */
 .skill-card {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 96px;
+	width: auto;                   /* ✅ No forzar ancho fijo (antes era 96px) */
 	text-align: center;
 	transition: transform 0.2s ease-in-out;
-}
-
-.skill-card:hover {
-	transform: scale(1.05);
 }
 
 .skill-card img {
@@ -41,10 +33,4 @@
 	height: 64px;
 	object-fit: contain;
 	background-color: transparent;
-}
-
-.skill-card span {
-	color: white;
-	font-size: 0.9rem;
-	margin-top: 0.5rem;
 }

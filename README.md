@@ -133,18 +133,14 @@ This template leverages several modern technologies to create a highly responsiv
 - **Styled Components**: A library for React and React Native that allows you to use component-level styles in your application. It utilizes tagged template literals to style components.
 - **Iconify**: A comprehensive library for icons that provides access to thousands of icons from different collections, all accessible via a single syntax.
 
-## Figma Design
 
-You can view and edit the design of this template on Figma. Here is the [Figma design link](https://www.figma.com/design/15EteAKw8d0QCNCucw5lft/mi-primer-blog?node-id=200-643&t=hbUqn1hqSfLcfI92-0).
 
 ## Author and License
 
-- **Author**: SofiDev / Garrux
 - **License**: MIT
 
 ## Bugs and Issues
 
-If you encounter any bugs or have issues, please report them [here](https://github.com/SofiDevO/portfolio-astrosofidev-garrux/issues).
 
 ## Homepage
 

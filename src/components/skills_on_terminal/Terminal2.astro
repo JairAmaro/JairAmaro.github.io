@@ -1,0 +1,18 @@
+---
+import './skills-on-terminal.css';
+const { nombre } = Astro.props;
+---
+
+<div class="terminal">
+	<div class="header">
+		<div class="close">✕</div>
+		<div class="minimize">—</div>
+		<div class="maximize">⇿</div>
+	</div>
+	<div class="body">
+		<div class="user__line">
+			<span class="user__name">{nombre}</span>@root:<span class="separator"> ~</span>$ . printskills
+		</div>
+		<slot />
+	</div>
+</div>
