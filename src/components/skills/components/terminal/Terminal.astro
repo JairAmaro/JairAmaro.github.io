@@ -5,7 +5,8 @@ import terminal from './terminal.module.css';
 const {
   nombre,
   hasSoftwares = false,
-  hasFrameworks = false
+  hasFrameworks = false,
+  hasClouds = false
 } = Astro.props;
 ---
 
@@ -38,6 +39,18 @@ const {
         </div>
         <div class="content">
           <slot name="frameworks" />
+        </div>
+      </>
+    )}
+
+    {hasClouds && (
+      <>
+        <div class={terminal.user__line}>
+          <span class={terminal.user__name}>{nombre}@root:</span>
+          <span class={terminal.separator}> ~</span>$ . clouds
+        </div>
+        <div class="content">
+          <slot name="clouds" />
         </div>
       </>
     )}
