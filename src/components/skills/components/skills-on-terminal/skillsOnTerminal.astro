@@ -3,7 +3,17 @@ import Terminal from '../terminal/Terminal.astro';
 import './skills-on-terminal.css';
 ---
 
-<Terminal nombre="Oscar_Amaro" hasSoftwares={true} hasFrameworks={true}>
+<Terminal nombre="Oscar_Amaro" hasSoftwares={true} hasFrameworks={true} hasClouds={true}>
+  <!-- SLOT: CLOUDS -->
+  <div slot="clouds" class="terminal__skills__container">
+  <img
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original-wordmark.svg"
+    alt="Google Cloud"
+    width="80"
+    height="80"
+  />
+</div>
+
 
   <!-- SLOT: SOFTWARES -->
   <div slot="softwares" class="terminal__skills__container">
@@ -62,6 +72,13 @@ import './skills-on-terminal.css';
       width="50"
       height="50"
     />
+    <img
+      src="https://raw.githubusercontent.com/ComposioHQ/open-logos/master/googl-bigquery.svg"
+      alt="BigQuery"
+      width="60"
+      height="60"
+    />
+
   <!-- -->
   </div>
 
@@ -110,7 +127,41 @@ import './skills-on-terminal.css';
       width="80"
       height="80"
     />
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/selenium/selenium-original.svg"
+      alt="Selenium"
+      width="50"
+      height="50"
+    />
+    <img
+    src="https://raw.githubusercontent.com/mwaskom/seaborn/master/doc/_static/logo-wide-lightbg.svg"
+    alt="Seaborn"
+    width="70"
+    height="70"
+    />
+    <!-- Apache Spark -->
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apachespark/apachespark-original-wordmark.svg"
+      alt="Apache Spark"
+      width="70"
+      height="70"
+    />
+
+    <!-- XGBoost -->
+    <img
+      src="https://xgboost.ai/images/logo/xgboost-logo-trimmed.png"
+      alt="XGBoost"
+      width="70"
+      height="70"
+    />
+
+    <!-- CatBoost -->
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/c/cc/CatBoostLogo.png"
+      alt="CatBoost"
+      width="40"
+      height="40"
+    />
   <!-- -->
   </div>
-
 </Terminal>
