@@ -89,6 +89,33 @@
   outline-offset: 2px;
 }
 
+.logoloop--fade {
+  --logoloop-fadeSize: clamp(24px, 8%, 120px);
+  
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black var(--logoloop-fadeSize),
+    black calc(100% - var(--logoloop-fadeSize)),
+    transparent 100%
+  );
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black var(--logoloop-fadeSize),
+    black calc(100% - var(--logoloop-fadeSize)),
+    transparent 100%
+  );
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+}
+
+
+/* Eliminado porque usamos mask-image ahora */
+/*
 .logoloop--fade::before,
 .logoloop--fade::after {
   content: '';
@@ -99,6 +126,7 @@
   pointer-events: none;
   z-index: 1;
 }
+*/
 
 .logoloop--fade::before {
   left: 0;
