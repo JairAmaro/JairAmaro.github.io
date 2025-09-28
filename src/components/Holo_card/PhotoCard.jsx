@@ -84,7 +84,7 @@ const PhotoCard = ({
           </div>
         </div>
 
-        {/* Imagen principal */}
+        {/* Imagen principal, aqui se cambia el tamanio de la imagen patrick  */}
         <div
           className="pc-avatar-zone"
           style={{
