@@ -19,7 +19,7 @@
 .pc-card-wrapper {
   perspective: 500px;
   position: relative;
-  touch-action: none;
+  touch-action: auto; /* ✅ Permite scroll en móviles */
 }
 
 .pc-card-wrapper::before {
