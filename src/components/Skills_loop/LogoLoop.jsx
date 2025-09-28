@@ -1,40 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, memo } from 'react';
 import './LogoLoop.css';
 
-// ✅ Logos definidos como objetos con src, alt, height
-const logos = [
-  {
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
-    alt: "Python",
-    height: 40,
-  },
-  {
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apacheairflow/apacheairflow-original.svg",
-    alt: "Airflow",
-    height: 40,
-  },
-  {
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original.svg",
-    alt: "GCP",
-    height: 40,
-  },
-  {
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
-    alt: "Git",
-    height: 40,
-  },
-  {
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg",
-    alt: "fastapi",
-    height: 40,
-  },
-  {
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg",
-    alt: "Pandas",
-    height: 40,
-  },
-];
-
 const ANIMATION_CONFIG = {
   SMOOTH_TAU: 0.25,
   MIN_COPIES: 2,
@@ -64,7 +30,6 @@ const useResizeObserver = (callback, elements, dependencies) => {
     return () => {
       observers.forEach(observer => observer?.disconnect());
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies);
 };
 
@@ -101,7 +66,6 @@ const useImageLoader = (seqRef, onLoad, dependencies) => {
         img.removeEventListener('error', handleImageLoad);
       });
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies);
 };
 
@@ -158,6 +122,7 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, isHovered, pauseOn
 };
 
 export const LogoLoop = memo(({
+  logos = [],                 // ✅ logos ahora viene como prop
   speed = 50,
   direction = 'left',
   width = '100%',
@@ -245,7 +210,7 @@ export const LogoLoop = memo(({
         {logos.map((item, itemIndex) => renderLogoItem(item, `${copyIndex}-${itemIndex}`))}
       </ul>
     ))
-  ), [copyCount, renderLogoItem]);
+  ), [copyCount, renderLogoItem, logos]);
 
   const containerStyle = useMemo(() => ({
     width: toCssLength(width) ?? '100%',
