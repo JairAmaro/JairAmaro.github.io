@@ -1,10 +1,9 @@
-***
+---
 title: "Programacion vectorizada: Optimizacion con indices"
 description: "El poder de usar indices en los datos y no programacion funcional"
 pubDate: 'Feb 16 2026'
 heroImage: "../img/paisaje.jpg"
-***
-
+---
 
 
 En este apartado hablaré sobre la importancia de programar de forma vectorizada en análisis de datos, sustituyendo el uso innecesario de `apply`, `lambda` y `for` anidados, los cuales suelen introducir ineficiencia cuando trabajamos con grandes volúmenes de información
@@ -25,7 +24,8 @@ Trabajamos así:
 
 Esto mejora el rendimiento, la claridad del código y la escalabilidad del proceso.
 
-***
+---
+---
 
 ## Caso práctico: Filtrar órdenes alfanuméricas
 
@@ -168,7 +168,6 @@ Todo dependera del nivel de complejidad del negocio y escalabilidad, ambas son b
 ## Conclusión
 
 Programar de forma vectorizada no es solo una optimización, es una mentalidad orientada a eficiencia y escalabilidad. En entornos donde los datos crecen exponencialmente, sustituir `apply`, `lambda` y `for` anidados por operaciones vectorizadas permite reducir tiempos de ejecución, mejorar la legibilidad del código y construir pipelines preparados para producción
-
 
 En ciencia de datos e ingeniería moderna, escribir código que piense en columnas y no en filas es una decisión estratégica. La vectorización no solo acelera procesos: habilita sistemas más robustos, mantenibles y alineados con arquitecturas de alto rendimiento
  🚀✨
